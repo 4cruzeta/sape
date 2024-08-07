@@ -28,7 +28,8 @@ urlpatterns = [
     path('', views.homepage),
     path('about/', views.about),
     path('posts/', include('posts.urls')),
-    path('users/', include('users.urls'))
+    path('users/', include('users.urls')),
+    path('inventory/', include('inventory.urls'))
 ] 
 
 if not settings.TESTING:
