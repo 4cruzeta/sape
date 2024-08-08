@@ -71,6 +71,18 @@ a:hover {
     max-width: 300px;
 }
 
+.form-with-validation select {
+    appearance: none;
+    max-width: 300px;
+    font-size: 1.15rem;
+    padding: 0.675em 6em 0.675em 1em;
+    background-color: #fff;
+    border: 1px solid #caced1;
+    border-radius: 0.25rem;
+    color: #000;
+    cursor: pointer;
+}
+
 .form-submit {
     padding: 0.5rem;
     border-radius: 10px;
@@ -108,4 +120,25 @@ a:hover {
 
 .logout-button:hover {
     opacity: .85;
+}
+
+.table {
+    border: solid 1px #DDEEEE;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 1.5rem;
+}
+.table thead th {
+    background-color: #DDEFEF;
+    border: solid 1px #DDEEEE;
+    color: #336B6B;
+    padding: 10px;
+    text-align: left;
+    text-shadow: 1px 1px 1px #fff;
+}
+.table tbody td {
+    border: solid 1px #DDEEEE;
+    color: #333;
+    padding: 10px;
+    text-shadow: 1px 1px 1px #fff;
 }

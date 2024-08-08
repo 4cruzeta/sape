@@ -11,11 +11,11 @@ CATEGORY = (
 )
 
 class Product(models.Model):
-    name = models.CharField(max_length=100, blank=False)
-    category = models.CharField(max_length=20, choices=CATEGORY, blank=False)
-    quantity = models.PositiveIntegerField(blank=False)
-    barcode = models.CharField(max_length=50, blank=True)
-    description = models.CharField(max_length=200, blank=True)
+    name = models.CharField(max_length=100, null=True)
+    category = models.CharField(max_length=20, choices=CATEGORY, null=True)
+    quantity = models.PositiveIntegerField(null=True)
+    barcode = models.CharField(max_length=50, null=True)
+    description = models.CharField(max_length=200, null=True)
 
     def __str__(self) -> str:
         return self.name

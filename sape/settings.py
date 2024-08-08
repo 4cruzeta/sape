@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'posts',
     'users',
-    'inventory',
+    'products',
 ]
 
 STATIC_URL = "static/"

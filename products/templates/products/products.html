@@ -1,13 +1,10 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-
     Product 
-
 {% endblock %}
 {% block content %}
-<table>
-                
+<table class=table>
     <thead>
         <tr>
             <th scope="col">Product Name</th>
@@ -28,13 +25,13 @@
     </tbody>
 </table>
 {% if user.is_staff and user.is_superuser %}
-<form method="POST">
+<form class="form-with-validation" method="POST">
     <h4>Add a New Product</h4>
     <hr>
     {% csrf_token %}
-    {{ form}}
+    {{ form }}
     <br>
-    <button type="submit">Add</button>
+    <button class="form-submit" type="submit">Add</button>
 </form>
 {% else %}
 {% endif %}

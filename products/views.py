@@ -19,7 +19,7 @@ def products(request):
                     product.quantity += add_form.cleaned_data['quantity']
                     product.save()
                 else:
-                    return render(request, 'inventory/products.html', context)
+                    return render(request, 'products/products.html', context)
             except Product.DoesNotExist:
                 form.save()
             return redirect('products')
@@ -30,4 +30,4 @@ def products(request):
         "products": products,
         "form": form
     }
-    return render(request, 'inventory/products.html', context)
+    return render(request, 'products/products.html', context)
