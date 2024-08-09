@@ -29,7 +29,8 @@ urlpatterns = [
     path('about/', views.about),
     path('posts/', include('posts.urls')),
     path('users/', include('users.urls')),
-    path('products/', include('products.urls'))
+    path('products/', include('products.urls')),
+    path('vendors/', include('vendors.urls'))
 ] 
 
 if not settings.TESTING:

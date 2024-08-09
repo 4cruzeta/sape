@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product, Category
 from django.contrib.auth.decorators import login_required
-from .forms import ProductForm 
+from .forms import ProductForm, CategoryForm
 
 # Create your views here.
 
-@login_required
+@login_required(login_url="/users/login/")
 def products(request):
     products = Product.objects.all()
     if request.method == 'POST':
@@ -31,3 +31,22 @@ def products(request):
         "form": form
     }
     return render(request, 'products/products.html', context)
+
+@login_required(login_url="/users/login/")
+def categories(request):
+    categories = Category.objects.all()
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('categories')
+    else:
+        form = CategoryForm()
+    
+    context = {
+    "title": "Category",
+    "categories": categories,
+    "form": form
+    }
+
+    return render(request, 'products/categories.html', context)

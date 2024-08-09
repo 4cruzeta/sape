@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Vendor 
+{% endblock %}
+{% block content %}
+<table class=table>
+    <thead>
+        <tr>
+            <th scope="col">Vendor Name</th>
+         
+        </tr>
+    </thead>
+    <tbody>
+        {% for vendor in vendors %}
+        <tr>
+            <td>{{ vendor.name }}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% if user.is_staff and user.is_superuser %}
+<form class="form-with-validation" method="POST">
+    <h4>Add a New Vendor</h4>
+    <hr>
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <button class="form-submit" type="submit">Add</button>
+</form>
+{% else %}
+{% endif %}
+{% endblock %}
+

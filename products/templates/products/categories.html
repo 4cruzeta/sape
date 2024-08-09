@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Category 
+{% endblock %}
+{% block content %}
+<table class=table>
+    <thead>
+        <tr>
+            <th scope="col">Category Name</th>
+         
+        </tr>
+    </thead>
+    <tbody>
+        {% for categorie in categories %}
+        <tr>
+            <td>{{ categorie.name }}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% if user.is_staff and user.is_superuser %}
+<form class="form-with-validation" method="POST">
+    <h4>Add a New Category</h4>
+    <hr>
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <button class="form-submit" type="submit">Add</button>
+</form>
+{% else %}
+{% endif %}
+{% endblock %}
+

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'posts',
     'users',
     'products',
+    'vendors',
 ]
 
 STATIC_URL = "static/"
