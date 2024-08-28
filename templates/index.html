@@ -1,21 +1,32 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    Home
+  Home
 {% endblock %}
 
 {% block content %}
-
-    <div class="container">
-        <div class="jumbotron">
-            <h1 class="display-4">Wellcome to SAPE !!! <i class="fas fa-globe-americas"></i></h1>
-            <p class="lead">Sistema de Administração de Pequenas Empresas</p>
-            <hr class="my-4">
-            <p>Sistema de Administração de Pequenas Empresas.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-        </div>
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-4">Wellcome to SAPE !!! <i class="fas fa-globe-americas"></i></h1>
+      <p class="lead">Sistema de Administração de Pequenas Empresas</p>
+      <hr class="my-4" />
+      <p>Sistema de Administração de Pequenas Empresas.</p>
+      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
     </div>
+  </div>
 
+  <div class="container">
+    <hr class="my-4" />
+    <section>
+      <h1>Posts</h1>
 
-    
-    {% endblock %}
+      {% for post in posts %}
+        <article class="post">
+          <h2><a href="{% url 'posts:page' post.id %}">{{ post.title }}</a></h2>
+          <p>{{ post.date }} by {{ post.author }}</p>
+          <p>{{ post.body }}</p>
+        </article>
+      {% endfor %}
+    </section>
+  </div>
+{% endblock %}

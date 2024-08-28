@@ -19,7 +19,7 @@ def post_new(request):
             newpost = form.save(commit=False) 
             newpost.author = request.user 
             newpost.save()
-            return redirect('posts/')
+            return redirect('/posts')
     else:
         form = forms.CreatePost()
     return render(request, 'posts/post_new.html', { 'form': form })

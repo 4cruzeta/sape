@@ -1,13 +1,15 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    {{ post.title }}
+  {{ post.title }}
 {% endblock %}
 
 {% block content %}
+  <div class="container">
     <section>
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.date }}</p>
-        <p>{{ post.body }}</p>
+      <h1>{{ post.title }}</h1>
+      <p>{{ post.date }}</p>
+      <p>{{ post.body }}</p>
     </section>
+  </div>
 {% endblock %}
