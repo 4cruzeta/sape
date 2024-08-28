@@ -1,0 +1,13 @@
+{% extends 'vendors_layout.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Vendor Detail</h1>
+    <h2>{{ vendor.name }}</h2>
+    <p>Address: {{ vendor.address }}</p>
+    <p>Phone: {{ vendor.phone }}</p>
+    <a href="{% url 'vendor_edit' vendor.pk %}" class="btn btn-sm btn-primary">Edit</a>
+    <a href="{% url 'products' vendor.pk %}" class="btn btn-sm btn-primary">Products</a>
+    <a href="{% url 'vendor_list' %}" class="btn btn-sm btn-secondary">Back</a>
+  </div>
+{% endblock %}

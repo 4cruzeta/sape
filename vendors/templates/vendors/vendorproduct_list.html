@@ -1,0 +1,15 @@
+{% extends 'vendors_layout.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Vendor Product List</h1>
+    <ul class="list-group">
+      {% for vendorproduct in vendorproducts %}
+        <li class="list-group-item">
+          {{ vendorproduct.name }}
+          <a href="{% url 'vendorproduct_detail' vendorproduct.vendor.pk vendorproduct.pk %}">View</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
