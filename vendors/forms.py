@@ -1,13 +1,31 @@
 # vendors/forms.py
+
 from django import forms
-from .models import Vendor, VendorProduct
+from .models import Vendor, VendorProduct, VendorOrder, VendorOrderItem
 
 class VendorForm(forms.ModelForm):
     class Meta:
         model = Vendor
-        fields = ('created_by', 'name', 'address', 'phone')
+        fields = ['name', 'address', 'phone']
 
+class VendorOrderForm(forms.ModelForm):
+    class Meta:
+        model = VendorOrder
+        fields = ['status']
+
+class VendorOrderItemForm(forms.ModelForm):
+    class Meta:
+        model = VendorOrderItem
+        fields = ['product', 'quantity']
+
+    def __init__(self, *args, **kwargs):
+        vendor = kwargs.pop('vendor', None)
+        super().__init__(*args, **kwargs)
+        if vendor:
+            self.fields['product'].queryset = VendorProduct.objects.filter(vendor=vendor)
+
+# If you need a form for VendorProduct, define it here
 class VendorProductForm(forms.ModelForm):
     class Meta:
         model = VendorProduct
-        fields = ('vendor', 'name')
+        fields = ['vendor', 'name']

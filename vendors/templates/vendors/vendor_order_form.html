@@ -1,0 +1,18 @@
+<!-- vendors/templates/vendors/vendor_order_form.html -->
+
+{% extends 'vendors_layout.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">{% if order_form.instance.pk %}Edit Order{% else %}New Order{% endif %} for {{ vendor.name }}</h1>
+    <form method="post">
+      {% csrf_token %}
+      <ul class="list-group list-group-flush">
+        {{ order_form.as_ul }}
+        {{ item_form.as_ul }}
+      </ul>
+      <button type="submit" class="btn btn-primary mt-3">Save</button>
+      <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

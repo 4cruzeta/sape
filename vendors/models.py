@@ -1,3 +1,5 @@
+# vendors/models.py
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -16,3 +18,20 @@ class VendorProduct(models.Model):
 
     def __str__(self):
         return self.name
+
+class VendorOrder(models.Model):
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
+    status = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Order {self.id} by {self.created_by.username} for {self.vendor.name}"
+
+class VendorOrderItem(models.Model):
+    order = models.ForeignKey(VendorOrder, on_delete=models.CASCADE)
+    product = models.ForeignKey(VendorProduct, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.quantity} of {self.product.name} in order {self.order.id}"

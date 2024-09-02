@@ -1,15 +1,25 @@
+<!--vendors/templates/vendors/vendorproduct_list.html-->
+
 {% extends 'vendors_layout.html' %}
 
 {% block content %}
-  <div class="container">
-    <h1>Vendor Product List</h1>
-    <ul class="list-group">
+  <div class="container mt-4">
+    <h1 class="mb-4">Products for {{ vendor.name }}</h1>
+    <ul class="list-group list-group-flush">
       {% for vendorproduct in vendorproducts %}
-        <li class="list-group-item">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
           {{ vendorproduct.name }}
-          <a href="{% url 'vendorproduct_detail' vendorproduct.vendor.pk vendorproduct.pk %}">View</a>
+          <div>
+            <a href="{% url 'vendorproduct_detail' vendorproduct.vendor.pk vendorproduct.pk %}" class="btn btn-sm btn-warning">View</a>
+            <form action="{% url 'vendorproduct_delete' vendorproduct.vendor.pk vendorproduct.pk %}" method="post" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this product?');">Delete</button>
+            </form>
+          </div>
         </li>
       {% endfor %}
     </ul>
+    <a href="{% url 'vendorproduct_new' vendor.pk %}" class="btn btn-primary mt-3">Add New Product</a>
+    <a href="{% url 'vendor_detail' vendor.pk %}" class="btn btn-secondary mt-3">Back to Vendor</a>
   </div>
 {% endblock %}
