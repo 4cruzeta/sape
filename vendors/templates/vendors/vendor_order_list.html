@@ -5,18 +5,30 @@
 {% block content %}
   <div class="container mt-4">
     <h1 class="mb-4">Orders for {{ vendor.name }}</h1>
-    <ul class="list-group list-group-flush">
+    <div class="btn-group mb-3">
+      <a href="{% url 'vendor_order_new' vendor.id %}" class="btn btn-sm btn-success">New Order</a>
+      <a href="{% url 'vendor_detail' vendor.id %}" class="btn btn-sm btn-secondary">Back to Vendor</a>
+    </div>
+    <ul class="list-group list-group-flush mb-3">
+      <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
+        <div class="w-25"><strong>Status</strong></div>
+        <div class="w-25"><strong>Created At</strong></div>
+        <div class="w-50"><strong>Actions</strong></div>
+      </li>
       {% for order in vendor_orders %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
-          Status: {{ order.status }} - Created at: {{ order.created_at }}
-          <form action="{% url 'vendor_order_delete' vendor.id order.id %}" method="post" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this order?');">Delete</button>
-          </form>
+          <div class="w-25">Status: {{ order.status }}</div>
+          <div class="w-25">Created at: {{ order.created_at }}</div>
+          <div class="w-50">
+            <a href="{% url 'vendor_order_detail' vendor.id order.id %}" class="btn btn-sm btn-info">View</a>
+            <a href="{% url 'vendor_order_edit' vendor.id order.id %}" class="btn btn-sm btn-warning">Edit</a>
+            <form action="{% url 'vendor_order_delete' vendor.id order.id %}" method="post" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this order?');">Delete</button>
+            </form>
+          </div>
         </li>
       {% endfor %}
     </ul>
-    <a href="{% url 'vendor_order_new' vendor.id %}" class="btn btn-primary mt-3">New Order</a>
-    <a href="{% url 'vendor_detail' vendor.id %}" class="btn btn-secondary mt-3">Back to Vendor</a>
   </div>
 {% endblock %}

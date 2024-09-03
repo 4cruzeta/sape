@@ -4,15 +4,22 @@
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">{% if order_form.instance.pk %}Edit Order{% else %}New Order{% endif %} for {{ vendor.name }}</h1>
+    <h1 class="mb-4">{{ order_form.instance.pk|yesno:"Edit Order,New Order" }} for {{ vendor.name }}</h1>
     <form method="post">
       {% csrf_token %}
-      <ul class="list-group list-group-flush">
-        {{ order_form.as_ul }}
-        {{ item_form.as_ul }}
-      </ul>
-      <button type="submit" class="btn btn-primary mt-3">Save</button>
-      <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-secondary mt-3">Cancel</a>
+      <div class="mb-3">
+        {{ order_form.as_p }}
+      </div>
+      <div class="mb-3">
+        {{ formset.management_form }}
+        {% for form in formset %}
+          <div class="mb-3">
+            {{ form.as_p }}
+          </div>
+        {% endfor %}
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+      <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-secondary">Cancel</a>
     </form>
   </div>
 {% endblock %}

@@ -8,6 +8,11 @@ class VendorForm(forms.ModelForm):
         model = Vendor
         fields = ['name', 'address', 'phone']
 
+class VendorProductForm(forms.ModelForm):
+    class Meta:
+        model = VendorProduct
+        fields = ['name',]
+
 class VendorOrderForm(forms.ModelForm):
     class Meta:
         model = VendorOrder
@@ -23,9 +28,3 @@ class VendorOrderItemForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if vendor:
             self.fields['product'].queryset = VendorProduct.objects.filter(vendor=vendor)
-
-# If you need a form for VendorProduct, define it here
-class VendorProductForm(forms.ModelForm):
-    class Meta:
-        model = VendorProduct
-        fields = ['vendor', 'name']

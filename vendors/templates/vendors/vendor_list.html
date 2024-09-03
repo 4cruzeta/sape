@@ -1,18 +1,28 @@
-<!--vendors/templates/vendors/vendor_list.html-->
+<!-- vendors/templates/vendors/vendor_list.html -->
 
 {% extends 'vendors_layout.html' %}
 
 {% block content %}
-<div class="container mt-4">
-    <h1 class="mb-4">Vendor List</h1>
-    <ul class="list-group list-group-flush">
-        {% for vendor in vendors %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{ vendor.name }}
-                <a href="{% url 'vendor_detail' vendor.pk %}" class="btn btn-sm btn-primary">View</a>
-            </li>
-        {% endfor %}
-    </ul>
+  <div class="container mt-4">
+    <h1 class="mb-4">Vendors List</h1>
     <a href="{% url 'vendor_new' %}" class="btn btn-primary mt-3">New Vendor</a>
-</div>
+    <ul class="list-group list-group-flush mb-3">
+      <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
+        <div class="w-25">
+          <strong>Name</strong>
+        </div>
+        <div class="w-25">
+          <strong>Actions</strong>
+        </div>
+      </li>
+      {% for vendor in vendors %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="w-75">{{ vendor.name }}</div>
+          <div class="w-25">
+            <a href="{% url 'vendor_detail' vendor.pk %}" class="btn btn-sm btn-primary">View</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
