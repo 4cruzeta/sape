@@ -1,0 +1,15 @@
+<!--inventory/templates/inventory/inventory_form.html-->
+
+{% extends 'inventory_layout.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">{% if form.instance.pk %}Edit Inventory Item{% else %}New Inventory Item{% endif %}</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Save</button>
+      <a href="{% url 'inventory_list' %}" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

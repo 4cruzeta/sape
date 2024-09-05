@@ -1,0 +1,20 @@
+<!--inventory/templates/inventory/inventory_detail.html-->
+
+{% extends 'inventory_layout.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">Inventory Detail</h1>
+    <ul class="list-group list-group-flush mb-3">
+      <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
+        <div class="w-50"><strong>Name</strong></div>
+        <div class="w-50"><strong>Quantity</strong></div>
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <div class="w-50">{{ inventory_item.name }}</div>
+        <div class="w-50">{{ inventory_item.quantity }}</div>
+      </li>
+    </ul>
+    <a href="{% url 'inventory_list' %}" class="btn btn-sm btn-secondary">Back to Inventory List</a>
+  </div>
+{% endblock %}
