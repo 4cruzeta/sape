@@ -1,0 +1,21 @@
+<!-- customers/templates/customers/order_detail.html -->
+
+{% extends 'customers_layout.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">Order Detail</h1>
+    <ul class="list-group list-group-flush mb-3">
+      <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
+        <div class="w-50"><strong>Order</strong></div>
+        <div class="w-50"><strong>Status</strong></div>
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <div class="w-50">Order {{ order.id }} for {{ order.customer.name }}</div>
+        <div class="w-50">{{ order.status }}</div>
+      </li>
+    </ul>
+    <a href="{% url 'order_edit' order.pk %}" class="btn btn-sm btn-warning">Edit</a>
+    <a href="{% url 'order_list' %}" class="btn btn-sm btn-secondary">Back to Orders List</a>
+  </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+<!-- customers/templates/customers/order_form.html -->
+
+{% extends 'customers_layout.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">{{ order_form.instance.pk|yesno:"Edit Order,New Order" }}</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        {{ order_form.as_p }}
+      </div>
+      <div class="mb-3">
+        {{ formset.management_form }}
+        {% for form in formset %}
+          <div class="mb-3">
+            {{ form.as_p }}
+          </div>
+        {% endfor %}
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+      <a href="{% url 'order_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

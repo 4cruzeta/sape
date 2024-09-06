@@ -1,0 +1,19 @@
+<!-- customers/templates/customers/customer_detail.html -->
+
+{% extends 'customers_layout.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">Customer Detail</h1>
+    <ul class="list-group list-group-flush mb-3">
+      <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
+        <div class="w-50"><strong>Name</strong></div>
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <div class="w-50">{{ customer.name }}</div>
+      </li>
+    </ul>
+    <a href="{% url 'customer_edit' customer.pk %}" class="btn btn-sm btn-warning">Edit</a>
+    <a href="{% url 'customer_list' %}" class="btn btn-sm btn-secondary">Back to Customers List</a>
+  </div>
+{% endblock %}

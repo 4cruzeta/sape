@@ -1,0 +1,15 @@
+<!-- customers/templates/customers/customer_confirm_delete.html -->
+
+{% extends 'customers_layout.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">Delete Customer</h1>
+    <p>Are you sure you want to delete the customer "{{ customer.name }}"?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Yes, delete</button>
+      <a href="{% url 'customer_detail' customer.pk %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+{% endblock %}
