@@ -24,10 +24,16 @@
           <ul class="navbar-nav mr-auto">
             {% if user.is_authenticated %}
               <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item active">
                 <a class="nav-link" href="/customers">Customers</a>
               </li>
               <li class="nav-item active">
                 <a class="nav-link" href="/customers/new">New Customer</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/inventory">Inventory</a>
               </li>
               <li class="nav-item active">
                 <a class="nav-link" href="/customers/orders">Orders</a>

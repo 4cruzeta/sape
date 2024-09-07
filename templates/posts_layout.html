@@ -31,15 +31,6 @@
               <li class="nav-item active">
                 <a class="nav-link" href="/posts/new-post">New post</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="/vendors">Vendors</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="/inventory">Inventory</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="/customers">Customers</a>
-              </li>
               <li class="nav-item">
                 <form class="logout" action="{% url 'users:logout' %}" method="post">
                   {% csrf_token %}
