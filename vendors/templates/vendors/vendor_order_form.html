@@ -7,17 +7,51 @@
     <h1 class="mb-4">{{ order_form.instance.pk|yesno:"Edit Order,New Order" }} for {{ vendor.name }}</h1>
     <form method="post">
       {% csrf_token %}
-      <div class="mb-3">
-        {{ order_form.as_p }}
-      </div>
-      <div class="mb-3">
+      <ul class="list-group list-group-flush mb-4">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="col-4">
+            {{ order_form.customer.label_tag }} {{ order_form.customer }}
+          </div>
+          <div class="col-4">
+            {{ order_form.status.label_tag }} {{ order_form.status }}
+          </div>
+        </li>
+        {% for field in order_form %}
+          {% if field.name != "customer" and field.name != "status" %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div class="col-4">{{ field.label_tag }}</div>
+              <div class="col-4">{{ field }}</div>
+              <div class="col-4 text-danger">{{ field.errors }}</div>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <ul class="list-group list-group-flush mb-3">
+        <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
+          <div class="col-4"><strong>Item Number</strong></div>
+          <div class="col-4"><strong>Product</strong></div>
+          <div class="col-4"><strong>Quantity</strong></div>
+        </li>
         {{ formset.management_form }}
         {% for form in formset %}
-          <div class="mb-3">
-            {{ form.as_p }}
-          </div>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="col-4">
+              {{ form.id }}
+              {{ form.instance.pk }}
+            </div>
+            <div class="col-4">
+              {{ form.product.label_tag }} {{ form.product }}
+            </div>
+            <div class="col-4">
+              {{ form.quantity.label_tag }} {{ form.quantity }}
+            </div>
+            <div class="col-4 text-danger">
+              {{ form.product.errors }}
+              {{ form.quantity.errors }}
+            </div>
+          </li>
         {% endfor %}
-      </div>
+      </ul>
       <button type="submit" class="btn btn-primary">Save</button>
       <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-secondary">Cancel</a>
       <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-success">Finished</a>
