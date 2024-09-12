@@ -20,6 +20,7 @@
       </div>
       <button type="submit" class="btn btn-primary">Save</button>
       <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-secondary">Cancel</a>
+      <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-success">Finished</a>
     </form>
   </div>
 {% endblock %}

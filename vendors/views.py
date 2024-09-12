@@ -101,16 +101,11 @@ def vendor_order_new(request, vendor_id):
             vendor_order.vendor = vendor
             vendor_order.created_by = request.user
             vendor_order.save()
-            print(f"Order saved: {vendor_order}")
 
             formset.instance = vendor_order
             formset.save()
-            print(f"Order items saved")
 
-            return redirect('vendor_order_list', vendor_id=vendor.id)
-        else:
-            print("Order form errors:", order_form.errors)
-            print("Item form errors:", formset.errors)
+            return redirect('vendor_order_edit', vendor_id=vendor.id, order_id=vendor_order.id)
     else:
         order_form = VendorOrderForm()
         formset = VendorOrderItemFormSet()
@@ -144,7 +139,7 @@ def vendor_order_edit(request, vendor_id, order_id):
         if order_form.is_valid() and formset.is_valid():
             order_form.save()
             formset.save()
-            return redirect('vendor_order_list', vendor_id=vendor.id)
+            return redirect('vendor_order_edit', vendor_id=vendor.id, order_id=order.id)
     else:
         order_form = VendorOrderForm(instance=order)
         formset = VendorOrderItemFormSet(instance=order)

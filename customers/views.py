@@ -67,7 +67,7 @@ def order_new(request):
             order = order_form.save()
             formset.instance = order
             formset.save()
-            return redirect('order_list')
+            return redirect('order_edit', pk=order.pk)
     else:
         order_form = OrderForm()
         formset = OrderItemFormSet()
@@ -84,7 +84,7 @@ def order_edit(request, pk):
         if order_form.is_valid() and formset.is_valid():
             order_form.save()
             formset.save()
-            return redirect('order_detail', pk=order.pk)
+            return redirect('order_edit', pk=order.pk)
     else:
         order_form = OrderForm(instance=order)
         formset = OrderItemFormSet(instance=order)
