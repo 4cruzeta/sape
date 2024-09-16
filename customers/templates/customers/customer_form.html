@@ -7,8 +7,16 @@
     <h1 class="mb-4">{% if form.instance.pk %}Edit Customer{% else %}New Customer{% endif %}</h1>
     <form method="post">
       {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-primary">Save</button>
+      <ul class="list-group list-group-flush">
+        {% for field in form %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="col-4">{{ field.label_tag }}</div>
+            <div class="col-8">{{ field }}</div>
+            <div class="col-12 text-danger">{{ field.errors }}</div>
+          </li>
+        {% endfor %}
+      </ul>
+      <button type="submit" class="btn btn-primary mt-3">Save</button>
       <a href="{% url 'customer_list' %}" class="btn btn-secondary mt-3">Cancel</a>
     </form>
   </div>

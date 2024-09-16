@@ -9,43 +9,39 @@
       {% csrf_token %}
       <ul class="list-group list-group-flush mb-4">
         <li class="list-group-item d-flex justify-content-between align-items-center">
-          <div class="col-4">
+          <div class="col-6">
             {{ order_form.customer.label_tag }} {{ order_form.customer }}
           </div>
-          <div class="col-4">
+          <div class="col-6">
             {{ order_form.status.label_tag }} {{ order_form.status }}
           </div>
         </li>
         {% for field in order_form %}
           {% if field.name != "customer" and field.name != "status" %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              <div class="col-4">{{ field.label_tag }}</div>
-              <div class="col-4">{{ field }}</div>
-              <div class="col-4 text-danger">{{ field.errors }}</div>
+              <div class="col-6">{{ field.label_tag }}</div>
+              <div class="col-6">{{ field }}</div>
+              <div class="col-6 text-danger">{{ field.errors }}</div>
             </li>
           {% endif %}
         {% endfor %}
       </ul>
       <ul class="list-group list-group-flush mb-3">
         <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-          <div class="col-4"><strong>Item Number</strong></div>
-          <div class="col-4"><strong>Product</strong></div>
-          <div class="col-4"><strong>Quantity</strong></div>
+          <div class="col-6"><strong>Product</strong></div>
+          <div class="col-6"><strong>Quantity</strong></div>
         </li>
         {{ formset.management_form }}
         {% for form in formset %}
           <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div class="col-4">
-              {{ form.id }}
-              {{ form.instance.pk }}
-            </div>
-            <div class="col-4">
+            {{ form.id }}
+            <div class="col-6">
               {{ form.product.label_tag }} {{ form.product }}
             </div>
-            <div class="col-4">
+            <div class="col-6">
               {{ form.quantity.label_tag }} {{ form.quantity }}
             </div>
-            <div class="col-4 text-danger">
+            <div class="col-6 text-danger">
               {{ form.product.errors }}
               {{ form.quantity.errors }}
             </div>

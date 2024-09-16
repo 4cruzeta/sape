@@ -1,15 +1,16 @@
 <!-- customers/templates/customers/customer_confirm_delete.html -->
 
 {% extends 'customers_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">Delete Customer</h1>
-    <p>Are you sure you want to delete the customer "{{ customer.name }}"?</p>
+    <h1 class="mb-4">{% trans "Delete Customer" %}</h1>
+    <p>{% blocktrans with customer_name=customer.name %}Are you sure you want to delete the customer "{{ customer_name }}"?{% endblocktrans %}</p>
     <form method="post">
       {% csrf_token %}
-      <button type="submit" class="btn btn-danger">Yes, delete</button>
-      <a href="{% url 'customer_detail' customer.pk %}" class="btn btn-secondary">Cancel</a>
+      <button type="submit" class="btn btn-danger">{% trans "Yes, delete" %}</button>
+      <a href="{% url 'customer_detail' customer.pk %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
     </form>
   </div>
 {% endblock %}
