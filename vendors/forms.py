@@ -6,12 +6,12 @@ from .models import Vendor, VendorProduct, VendorOrder, VendorOrderItem
 class VendorForm(forms.ModelForm):
     class Meta:
         model = Vendor
-        fields = ['name', 'address', 'phone']
+        fields = ['name', 'address', 'phone', 'email', 'contact', 'notes']
 
 class VendorProductForm(forms.ModelForm):
     class Meta:
         model = VendorProduct
-        fields = ['name',]
+        fields = ['name', 'price', 'description', 'bar_code']
 
 class VendorOrderForm(forms.ModelForm):
     class Meta:

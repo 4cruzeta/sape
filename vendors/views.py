@@ -73,6 +73,7 @@ def vendorproduct_new(request, pk):
     return render(request, 'vendors/vendorproduct_form.html', {'form': form, 'vendor': vendor})
 
 def vendorproduct_edit(request, pk, vendorproduct_pk):
+    vendor = get_object_or_404(Vendor, pk=pk)
     vendorproduct = get_object_or_404(VendorProduct, pk=vendorproduct_pk)
     if request.method == 'POST':
         form = VendorProductForm(request.POST, instance=vendorproduct)
@@ -81,7 +82,7 @@ def vendorproduct_edit(request, pk, vendorproduct_pk):
             return redirect('vendorproduct_detail', pk=pk, vendorproduct_pk=vendorproduct_pk)
     else:
         form = VendorProductForm(instance=vendorproduct)
-    return render(request, 'vendors/vendorproduct_form.html', {'form': form})
+    return render(request, 'vendors/vendorproduct_form.html', {'form': form, 'vendor': vendor})
 
 def vendorproduct_delete(request, pk, vendorproduct_pk):
     vendorproduct = get_object_or_404(VendorProduct, pk=vendorproduct_pk)

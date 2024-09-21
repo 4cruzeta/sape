@@ -4,7 +4,7 @@
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">Add New Product for {{ vendor.name }}</h1>
+    <h1 class="mb-4">{% if form.instance.pk %}Edit Product for {{ vendor.name }}{% else %}Add New Product for {{ vendor.name }}{% endif %}</h1>
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
