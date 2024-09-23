@@ -68,7 +68,8 @@ class VendorOrder(models.Model):
 
 class VendorOrderItem(models.Model):
     order = models.ForeignKey(VendorOrder, on_delete=models.CASCADE)
-    product = models.ForeignKey(VendorProduct, on_delete=models.CASCADE)
+    product = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.IntegerField()
     expiry_date = models.DateField(blank=True, null=True)
 

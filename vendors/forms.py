@@ -21,10 +21,13 @@ class VendorOrderForm(forms.ModelForm):
 class VendorOrderItemForm(forms.ModelForm):
     class Meta:
         model = VendorOrderItem
-        fields = ['product', 'quantity']
+        fields = ['product', 'price', 'quantity']  # Include price field
 
     def __init__(self, *args, **kwargs):
         vendor = kwargs.pop('vendor', None)
         super().__init__(*args, **kwargs)
         if vendor:
-            self.fields['product'].queryset = VendorProduct.objects.filter(vendor=vendor)
+            product_choices = [('', '---')] + [(product.name, product.name) for product in VendorProduct.objects.filter(vendor=vendor)]
+            self.fields['product'].widget = forms.Select(choices=product_choices)
+        self.fields['price'].widget.attrs['readonly'] = True  # Make price field read-only
+        self.fields['price'].widget.attrs['class'] = 'price-field'  # Add class for JavaScript

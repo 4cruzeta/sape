@@ -96,7 +96,7 @@ def vendor_order_new(request, vendor_id):
 
     if request.method == 'POST':
         order_form = VendorOrderForm(request.POST)
-        formset = VendorOrderItemFormSet(request.POST)
+        formset = VendorOrderItemFormSet(request.POST, form_kwargs={'vendor': vendor})
         if order_form.is_valid() and formset.is_valid():
             vendor_order = order_form.save(commit=False)
             vendor_order.vendor = vendor
@@ -109,9 +109,26 @@ def vendor_order_new(request, vendor_id):
             return redirect('vendor_order_edit', vendor_id=vendor.id, order_id=vendor_order.id)
     else:
         order_form = VendorOrderForm()
-        formset = VendorOrderItemFormSet()
-        for form in formset:
-            form.fields['product'].queryset = VendorProduct.objects.filter(vendor=vendor)
+        formset = VendorOrderItemFormSet(form_kwargs={'vendor': vendor})
+    
+    return render(request, 'vendors/vendor_order_form.html', {'order_form': order_form, 'formset': formset, 'vendor': vendor})
+
+@login_required(login_url="/users/login/")
+def vendor_order_edit(request, vendor_id, order_id):
+    vendor = get_object_or_404(Vendor, pk=vendor_id)
+    order = get_object_or_404(VendorOrder, pk=order_id, vendor=vendor)
+    VendorOrderItemFormSet = inlineformset_factory(VendorOrder, VendorOrderItem, form=VendorOrderItemForm, extra=1, can_delete=True)
+
+    if request.method == 'POST':
+        order_form = VendorOrderForm(request.POST, instance=order)
+        formset = VendorOrderItemFormSet(request.POST, instance=order, form_kwargs={'vendor': vendor})
+        if order_form.is_valid() and formset.is_valid():
+            order_form.save()
+            formset.save()
+            return redirect('vendor_order_edit', vendor_id=vendor.id, order_id=order.id)
+    else:
+        order_form = VendorOrderForm(instance=order)
+        formset = VendorOrderItemFormSet(instance=order, form_kwargs={'vendor': vendor})
     
     return render(request, 'vendors/vendor_order_form.html', {'order_form': order_form, 'formset': formset, 'vendor': vendor})
 
@@ -127,27 +144,6 @@ def vendor_order_detail(request, vendor_id, order_id):
     vendor = get_object_or_404(Vendor, pk=vendor_id)
     order = get_object_or_404(VendorOrder, pk=order_id, vendor=vendor)
     return render(request, 'vendors/vendor_order_detail.html', {'vendor': vendor, 'order': order})
-
-@login_required(login_url="/users/login/")
-def vendor_order_edit(request, vendor_id, order_id):
-    vendor = get_object_or_404(Vendor, pk=vendor_id)
-    order = get_object_or_404(VendorOrder, pk=order_id, vendor=vendor)
-    VendorOrderItemFormSet = inlineformset_factory(VendorOrder, VendorOrderItem, form=VendorOrderItemForm, extra=1, can_delete=True)
-
-    if request.method == 'POST':
-        order_form = VendorOrderForm(request.POST, instance=order)
-        formset = VendorOrderItemFormSet(request.POST, instance=order)
-        if order_form.is_valid() and formset.is_valid():
-            order_form.save()
-            formset.save()
-            return redirect('vendor_order_edit', vendor_id=vendor.id, order_id=order.id)
-    else:
-        order_form = VendorOrderForm(instance=order)
-        formset = VendorOrderItemFormSet(instance=order)
-        for form in formset:
-            form.fields['product'].queryset = VendorProduct.objects.filter(vendor=vendor)
-    
-    return render(request, 'vendors/vendor_order_form.html', {'order_form': order_form, 'formset': formset, 'vendor': vendor})
 
 @login_required(login_url="/users/login/")
 def vendor_order_delete(request, vendor_id, order_id):

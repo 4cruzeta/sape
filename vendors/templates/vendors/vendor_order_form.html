@@ -28,21 +28,31 @@
       </ul>
       <ul class="list-group list-group-flush mb-3">
         <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-          <div class="col-6"><strong>Product</strong></div>
-          <div class="col-6"><strong>Quantity</strong></div>
+          <div class="col-3"><strong>Product</strong></div>
+          <div class="col-3"><strong>Price</strong></div>
+          <div class="col-3"><strong>Quantity</strong></div>
+          <div class="col-3"><strong>Actions</strong></div> <!-- Added Actions column -->
         </li>
         {{ formset.management_form }}
         {% for form in formset %}
           <li class="list-group-item d-flex justify-content-between align-items-center">
             {{ form.id }}
-            <div class="col-6">
+            <div class="col-3">
               {{ form.product.label_tag }} {{ form.product }}
             </div>
-            <div class="col-6">
+            <div class="col-3">
+              {{ form.price.label_tag }} {{ form.price }}  <!-- Display price field as read-only -->
+            </div>
+            <div class="col-3">
               {{ form.quantity.label_tag }} {{ form.quantity }}
             </div>
-            <div class="col-6 text-danger">
+            <div class="col-3">
+              {{ form.DELETE }}  <!-- Include the delete checkbox -->
+              <label class="text-danger" for="{{ form.DELETE.id_for_label }}">Delete</label>
+            </div>
+            <div class="col-12 text-danger">
               {{ form.product.errors }}
+              {{ form.price.errors }}  <!-- Display price errors -->
               {{ form.quantity.errors }}
             </div>
           </li>
@@ -53,4 +63,22 @@
       <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-success">Finished</a>
     </form>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const productPriceMap = {
+        {% for product in vendor.vendorproduct_set.all %}
+          '{{ product.name }}': '{{ product.price }}',
+        {% endfor %}
+      };
+
+      document.querySelectorAll('select[name$="product"]').forEach(function(selectElement) {
+        selectElement.addEventListener('change', function() {
+          const selectedProduct = this.value;
+          const priceField = this.closest('li').querySelector('.price-field');
+          priceField.value = productPriceMap[selectedProduct] || '';
+        });
+      });
+    });
+  </script>
 {% endblock %}
