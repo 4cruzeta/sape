@@ -8,6 +8,7 @@ class InventoryConfig(AppConfig):
     verbose_name = "Product"
     verbose_name_plural = "Products"
 
-
     def ready(self):
         import inventory.signals
+
+

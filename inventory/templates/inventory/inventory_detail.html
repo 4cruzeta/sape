@@ -1,4 +1,4 @@
-<!--inventory/templates/inventory/inventory_detail.html-->
+<!-- inventory/templates/inventory/inventory_detail.html -->
 
 {% extends 'inventory_layout.html' %}
 
@@ -7,11 +7,11 @@
     <h1 class="mb-4">Inventory Detail</h1>
     <ul class="list-group list-group-flush mb-3">
       <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-        <div class="w-50"><strong>Name</strong></div>
+        <div class="w-50"><strong>Product</strong></div> <!-- Updated to 'Product' -->
         <div class="w-50"><strong>Quantity</strong></div>
       </li>
       <li class="list-group-item d-flex justify-content-between">
-        <div class="w-50">{{ inventory_item.name }}</div>
+        <div class="w-50">{{ inventory_item.product }}</div> <!-- Updated to use 'product' -->
         <div class="w-50">{{ inventory_item.quantity }}</div>
       </li>
     </ul>

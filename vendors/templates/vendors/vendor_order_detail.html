@@ -19,5 +19,16 @@
       <a href="{% url 'vendor_order_edit' vendor.id order.id %}" class="btn btn-sm btn-warning">Edit</a>
       <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-sm btn-secondary">Back to Orders</a>
     </div>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="status">Update Status</label>
+        <select id="status" name="status" class="form-control">
+          <option value="pending" {% if order.status == 'pending' %}selected{% endif %}>Pending</option>
+          <option value="delivered" {% if order.status == 'delivered' %}selected{% endif %}>Delivered</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Update Status</button>
+    </form>
   </div>
 {% endblock %}

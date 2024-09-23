@@ -1,11 +1,14 @@
 # vendors/views.py
-
+import logging
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory
 from .models import Vendor, VendorProduct, VendorOrder, VendorOrderItem
 from .forms import VendorForm, VendorOrderForm, VendorOrderItemForm, VendorProductForm
 
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 @login_required(login_url="/users/login/")
 def vendor_list(request):

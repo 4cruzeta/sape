@@ -4,6 +4,6 @@ from django.contrib import admin
 from .models import Inventory
 
 class InventoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'quantity')
+    list_display = ('product', 'quantity')
 
 admin.site.register(Inventory, InventoryAdmin)
