@@ -1,20 +1,25 @@
 <!-- inventory/templates/inventory/inventory_detail.html -->
 
 {% extends 'inventory_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">Inventory Detail</h1>
+    <h1 class="mb-4">{% trans "Inventory Detail" %}</h1>
     <ul class="list-group list-group-flush mb-3">
       <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-        <div class="w-50"><strong>Product</strong></div> <!-- Updated to 'Product' -->
-        <div class="w-50"><strong>Quantity</strong></div>
+        <div class="w-50"><strong>{% trans "Product" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Quantity" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Description" %}</strong></div> <!-- New column for Description -->
       </li>
       <li class="list-group-item d-flex justify-content-between">
-        <div class="w-50">{{ inventory_item.product }}</div> <!-- Updated to use 'product' -->
-        <div class="w-50">{{ inventory_item.quantity }}</div>
+        <div class="w-50">{{ inventory_item.product }}</div>
+        <div class="w-25">{{ inventory_item.quantity }}</div>
+        <div class="w-25">
+          <textarea class="form-control" rows="5" readonly>{{ inventory_item.description }}</textarea> <!-- Display the description in a text box -->
+        </div>
       </li>
     </ul>
-    <a href="{% url 'inventory_list' %}" class="btn btn-sm btn-secondary">Back to Inventory List</a>
+    <a href="{% url 'inventory_list' %}" class="btn btn-sm btn-secondary">{% trans "Back to Inventory List" %}</a>
   </div>
 {% endblock %}

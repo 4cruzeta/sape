@@ -6,19 +6,22 @@
 {% block content %}
   <div class="container mt-4">
     <h1 class="mb-4">{% trans "Inventory List" %}</h1>
+    <a href="{% url 'inventory_new' %}" class="btn btn-success mb-3">{% trans "Add New Product" %}</a> <!-- Button to add a new product -->
     <ul class="list-group list-group-flush mb-3">
       <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-        <div class="w-50"><strong>{% trans "Product" %}</strong></div>
-        <div class="w-25"><strong>{% trans "Quantity" %}</strong></div>
-        <div class="w-25"><strong>{% trans "Cost Price" %}</strong></div>
+        <div class="w-30"><strong>{% trans "Product" %}</strong></div>
+        <div class="w-20"><strong>{% trans "Quantity" %}</strong></div>
+        <div class="w-20"><strong>{% trans "Cost Price" %}</strong></div>
+        <div class="w-30"><strong>{% trans "Actions" %}</strong></div> <!-- New column for Actions -->
       </li>
       {% for item in inventory_items %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
-          <div class="w-50">{{ item.product }}</div>
-          <div class="w-25">{{ item.quantity }}</div>
-          <div class="w-25">{{ item.cost_price }}</div>
-          <div>
+          <div class="w-30">{{ item.product }}</div>
+          <div class="w-20">{{ item.quantity }}</div>
+          <div class="w-20">{{ item.cost_price }}</div>
+          <div class="w-30">
             <a href="{% url 'inventory_detail' item.pk %}" class="btn btn-sm btn-primary">{% trans "View" %}</a>
+            <a href="{% url 'inventory_edit' item.pk %}" class="btn btn-sm btn-warning">{% trans "Edit" %}</a> <!-- Edit button -->
           </div>
         </li>
       {% endfor %}
