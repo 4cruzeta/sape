@@ -1,6 +1,8 @@
-<!-- templates/customers_layout.html -->
+<!-- customers_layout.html -->
 
 {% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,37 +21,37 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand" href="/">SAPE</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{% trans 'Toggle navigation' %}"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             {% if user.is_authenticated %}
               <li class="nav-item active">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/">{% trans "Home" %}</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="/customers">Customers</a>
+                <a class="nav-link" href="/customers">{% trans "Customers" %}</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="/customers/new">New Customer</a>
+                <a class="nav-link" href="/customers/new">{% trans "New Customer" %}</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="/inventory">Inventory</a>
+                <a class="nav-link" href="/inventory">{% trans "Inventory" %}</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="/customers/orders">Orders</a>
+                <a class="nav-link" href="/customers/orders">{% trans "Orders" %}</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="/customers/orders/new">New Order</a>
+                <a class="nav-link" href="/customers/orders/new">{% trans "New Order" %}</a>
               </li>
               <li class="nav-item">
                 <form class="logout" action="{% url 'users:logout' %}" method="post">
                   {% csrf_token %}
-                  <button class="btn btn-danger rounded-pill px-3" aria-label="User Logout" title="User Logout">Logout</button>
+                  <button class="btn btn-danger rounded-pill px-3" aria-label="{% trans 'User Logout' %}" title="{% trans 'User Logout' %}">{% trans "Logout" %}</button>
                 </form>
               </li>
             {% else %}
               <li class="nav-item">
-                <a class="btn btn-success rounded-pill px-3" href="{% url 'users:login' %}">Login</a>
+                <a class="btn btn-success rounded-pill px-3" href="{% url 'users:login' %}">{% trans "Login" %}</a>
               </li>
             {% endif %}
           </ul>
@@ -58,9 +60,8 @@
     </nav>
     <main>
       {% block content %}
-
       {% endblock %}
     </main>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   </body>
 </html>

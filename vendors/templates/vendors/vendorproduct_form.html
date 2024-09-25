@@ -1,15 +1,22 @@
 <!-- vendors/templates/vendors/vendorproduct_form.html -->
 
 {% extends 'vendors_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">{% if form.instance.pk %}Edit Product for {{ vendor.name }}{% else %}Add New Product for {{ vendor.name }}{% endif %}</h1>
+    <h1 class="mb-4">
+      {% if form.instance.pk %}
+        {% blocktrans with vendor_name=vendor.name %}Edit Product for {{ vendor_name }}{% endblocktrans %}
+      {% else %}
+        {% blocktrans with vendor_name=vendor.name %}Add New Product for {{ vendor_name }}{% endblocktrans %}
+      {% endif %}
+    </h1>
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
     </form>
-    <a href="{% url 'products' vendor.pk %}" class="btn btn-secondary mt-3">Back to Products</a>
+    <a href="{% url 'products' vendor.pk %}" class="btn btn-secondary mt-3">{% trans "Back to Products" %}</a>
   </div>
 {% endblock %}

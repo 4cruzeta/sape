@@ -26,27 +26,27 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             {% if user.is_authenticated %}
-              <li class="nav-item active">
-                <a class="nav-link" href="/{{ LANGUAGE_CODE }}/">Home</a> <!-- Adjusted link -->
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="/{{ LANGUAGE_CODE }}/vendors">Vendors</a> <!-- Adjusted link -->
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="/{{ LANGUAGE_CODE }}/vendors/new">New Vendor</a> <!-- Adjusted link -->
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="/{{ LANGUAGE_CODE }}/inventory">Inventory</a> <!-- Adjusted link -->
-              </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/{{ LANGUAGE_CODE }}/">{% trans "Home" %}</a> <!-- Adjusted link -->
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/{{ LANGUAGE_CODE }}/vendors">{% trans "Vendors" %}</a> <!-- Adjusted link -->
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/{{ LANGUAGE_CODE }}/vendors/new">{% trans "New Vendor" %}</a> <!-- Adjusted link -->
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/{{ LANGUAGE_CODE }}/inventory">{% trans "Inventory" %}</a> <!-- Adjusted link -->
+            </li>
               <li class="nav-item">
                 <form class="logout" action="{% url 'users:logout' %}" method="post">
                   {% csrf_token %}
-                  <button class="btn btn-danger rounded-pill px-3" aria-label="User Logout" title="User Logout">Logout</button>
+                  <button class="btn btn-danger rounded-pill px-3" aria-label="User Logout" title="User Logout">{% trans "Logout" %}</button>
                 </form>
               </li>
             {% else %}
               <li class="nav-item">
-                <a class="btn btn-success rounded-pill px-3" href="{% url 'users:login' %}">Login</a>
+                <a class="btn btn-success rounded-pill px-3" href="{% url 'users:login' %}">{% trans "Login" %}</a>
               </li>
             {% endif %}
           </ul>

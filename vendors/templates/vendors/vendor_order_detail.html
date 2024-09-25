@@ -1,14 +1,15 @@
 <!-- vendors/templates/vendors/vendor_order_detail.html -->
 
 {% extends 'vendors_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">Order Detail for {{ vendor.name }}</h1>
+    <h1 class="mb-4">{% blocktrans with vendor_name=vendor.name %}Order Detail for {{ vendor_name }}{% endblocktrans %}</h1>
     <ul class="list-group list-group-flush mb-3">
       <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-        <div class="w-50"><strong>Status</strong></div>
-        <div class="w-50"><strong>Created At</strong></div>
+        <div class="w-50"><strong>{% trans "Status" %}</strong></div>
+        <div class="w-50"><strong>{% trans "Created At" %}</strong></div>
       </li>
       <li class="list-group-item d-flex justify-content-between">
         <div class="w-50">{{ order.status }}</div>
@@ -16,19 +17,19 @@
       </li>
     </ul>
     <div class="btn-group mb-3">
-      <a href="{% url 'vendor_order_edit' vendor.id order.id %}" class="btn btn-sm btn-warning">Edit</a>
-      <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-sm btn-secondary">Back to Orders</a>
+      <a href="{% url 'vendor_order_edit' vendor.id order.id %}" class="btn btn-sm btn-warning">{% trans "Edit" %}</a>
+      <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-sm btn-secondary">{% trans "Back to Orders" %}</a>
     </div>
     <form method="post">
       {% csrf_token %}
       <div class="form-group">
-        <label for="status">Update Status</label>
+        <label for="status">{% trans "Update Status" %}</label>
         <select id="status" name="status" class="form-control">
-          <option value="pending" {% if order.status == 'pending' %}selected{% endif %}>Pending</option>
-          <option value="delivered" {% if order.status == 'delivered' %}selected{% endif %}>Delivered</option>
+          <option value="pending" {% if order.status == 'pending' %}selected{% endif %}>{% trans "Pending" %}</option>
+          <option value="delivered" {% if order.status == 'delivered' %}selected{% endif %}>{% trans "Delivered" %}</option>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary mt-3">Update Status</button>
+      <button type="submit" class="btn btn-primary mt-3">{% trans "Update Status" %}</button>
     </form>
   </div>
 {% endblock %}

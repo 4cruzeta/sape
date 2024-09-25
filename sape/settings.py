@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-1ukpqp00q9s2@c#ew75$10805yg#a#7ign#l$f2onm^#ee0%mb
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-'''
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -49,9 +49,14 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        'django.db.backends': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
     },
 }
-'''
+
 ALLOWED_HOSTS = []
 
 

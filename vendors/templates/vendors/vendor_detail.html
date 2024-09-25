@@ -1,34 +1,35 @@
 <!-- vendors/templates/vendors/vendor_detail.html -->
 
 {% extends 'vendors_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">Vendor Detail</h1>
-    <a href="{% url 'vendor_order_new' vendor.pk %}" class="btn btn-sm btn-success">New Order</a>
-    <a href="{% url 'vendor_order_list' vendor.pk %}" class="btn btn-sm btn-primary">List Orders</a>
-    <a href="{% url 'vendor_list' %}" class="btn btn-sm btn-secondary">Back</a>
+    <h1 class="mb-4">{% trans "Vendor Detail" %}</h1>
+    <a href="{% url 'vendor_order_new' vendor.pk %}" class="btn btn-sm btn-success">{% trans "New Order" %}</a>
+    <a href="{% url 'vendor_order_list' vendor.pk %}" class="btn btn-sm btn-primary">{% trans "List Orders" %}</a>
+    <a href="{% url 'vendor_list' %}" class="btn btn-sm btn-secondary">{% trans "Back" %}</a>
     <ul class="list-group list-group-flush mb-3">
       <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-        <div class="w-25"><strong>Name</strong></div>
-        <div class="w-25"><strong>Address</strong></div>
-        <div class="w-25"><strong>Phone</strong></div>
-        <div class="w-25"><strong>Actions</strong></div>
+        <div class="w-25"><strong>{% trans "Name" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Address" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Phone" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Actions" %}</strong></div>
       </li>
       <li class="list-group-item d-flex justify-content-between">
         <div class="w-25">{{ vendor.name }}</div>
         <div class="w-25">{{ vendor.address }}</div>
         <div class="w-25">{{ vendor.phone }}</div>
         <div class="w-25">
-          <a href="{% url 'vendor_edit' vendor.pk %}" class="btn btn-sm btn-warning">Edit</a>
-          <a href="{% url 'products' vendor.pk %}" class="btn btn-sm btn-info">Products</a>
-          <a href="{% url 'vendor_delete' vendor.pk %}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this vendor?');">Delete</a>
+          <a href="{% url 'vendor_edit' vendor.pk %}" class="btn btn-sm btn-warning">{% trans "Edit" %}</a>
+          <a href="{% url 'products' vendor.pk %}" class="btn btn-sm btn-info">{% trans "Products" %}</a>
+          <a href="{% url 'vendor_delete' vendor.pk %}" class="btn btn-sm btn-danger" onclick="return confirm('{% trans "Are you sure you want to delete this vendor?" %}');">{% trans "Delete" %}</a>
         </div>
       </li>
       <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-        <div class="w-25"><strong>Email</strong></div>
-        <div class="w-25"><strong>Contact</strong></div>
-        <div class="w-50"><strong>Notes</strong></div>
+        <div class="w-25"><strong>{% trans "Email" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Contact" %}</strong></div>
+        <div class="w-50"><strong>{% trans "Notes" %}</strong></div>
       </li>
       <li class="list-group-item d-flex justify-content-between">
         <div class="w-25">{{ vendor.email }}</div>

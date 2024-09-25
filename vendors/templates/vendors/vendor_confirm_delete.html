@@ -1,15 +1,16 @@
-<!--vendors/templates/vendors/vendor_confirm_delete.html-->
+<!-- vendors/templates/vendors/vendor_confirm_delete.html -->
 
 {% extends 'vendors_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
-    <h1>Delete Vendor</h1>
-    <p>Are you sure you want to delete the vendor "{{ vendor.name }}"?</p>
+    <h1>{% trans "Delete Vendor" %}</h1>
+    <p>{% blocktrans with vendor_name=vendor.name %}Are you sure you want to delete the vendor "{{ vendor_name }}"?{% endblocktrans %}</p>
     <form method="post">
       {% csrf_token %}
-      <button type="submit" class="btn btn-danger">Yes, delete</button>
-      <a href="{% url 'vendor_detail' vendor.pk %}" class="btn btn-secondary">Cancel</a>
+      <button type="submit" class="btn btn-danger">{% trans "Yes, delete" %}</button>
+      <a href="{% url 'vendor_detail' vendor.pk %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
     </form>
   </div>
 {% endblock %}

@@ -1,21 +1,22 @@
 <!-- customers/templates/customers/order_list.html -->
 
 {% extends 'customers_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">Orders List</h1>
-    <a href="{% url 'order_new' %}" class="btn btn-primary mt-3">New Order</a>
+    <h1 class="mb-4">{% trans "Orders List" %}</h1>
+    <a href="{% url 'order_new' %}" class="btn btn-primary mt-3">{% trans "New Order" %}</a>
     <ul class="list-group list-group-flush mb-3">
       <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-        <div class="w-75"><strong>Order</strong></div>
-        <div class="w-25"><strong>Actions</strong></div>
+        <div class="w-75"><strong>{% trans "Order" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Actions" %}</strong></div>
       </li>
       {% for order in orders %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
-          <div class="w-75">Order {{ order.id }} for {{ order.customer.name }}</div>
+          <div class="w-75">{% blocktrans with order_id=order.id customer_name=order.customer.name %}Order {{ order_id }} for {{ customer_name }}{% endblocktrans %}</div>
           <div class="w-25">
-            <a href="{% url 'order_detail' order.pk %}" class="btn btn-sm btn-primary">View</a>
+            <a href="{% url 'order_detail' order.pk %}" class="btn btn-sm btn-primary">{% trans "View" %}</a>
           </div>
         </li>
       {% endfor %}

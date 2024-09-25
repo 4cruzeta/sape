@@ -1,10 +1,11 @@
 <!-- vendors/templates/vendors/vendor_form.html -->
 
 {% extends 'vendors_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">{% if form.instance.pk %}Edit Vendor {% else %}New Vendor{% endif %}</h1>
+    <h1 class="mb-4">{% if form.instance.pk %}{% trans "Edit Vendor" %}{% else %}{% trans "New Vendor" %}{% endif %}</h1>
     <form method="post">
       {% csrf_token %}
       <ul class="list-group list-group-flush">
@@ -16,8 +17,8 @@
           </li>
         {% endfor %}
       </ul>
-      <button type="submit" class="btn btn-primary mt-3">Save</button>
-      <a href="{% url 'vendor_list' %}" class="btn btn-secondary mt-3">Cancel</a>
+      <button type="submit" class="btn btn-primary mt-3">{% trans "Save" %}</button>
+      <a href="{% url 'vendor_list' %}" class="btn btn-secondary mt-3">{% trans "Cancel" %}</a>
     </form>
   </div>
 {% endblock %}

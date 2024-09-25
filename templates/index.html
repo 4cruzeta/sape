@@ -1,29 +1,32 @@
+<!--templates/index.html-->
+
 {% extends 'layout.html' %}
+{% load i18n %}
 
 {% block title %}
-  Home
+  {% trans "Home" %}
 {% endblock %}
 
 {% block content %}
   <div class="container">
     <div class="jumbotron">
-      <h1 class="display-4">Wellcome to SAPE !!! <i class="fas fa-globe-americas"></i></h1>
-      <p class="lead">Sistema de Administração de Pequenas Empresas</p>
+      <h1 class="display-4">{% trans "Welcome to SBAS" %} <i class="fas fa-globe-americas"></i></h1>
+      <p class="lead">{% trans "Small Business Administration System" %}</p>
       <hr class="my-4" />
-      <p>Sistema de Administração de Pequenas Empresas.</p>
-      <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+      <p>{% trans "Small Business Administration System." %}</p>
+      <a class="btn btn-primary btn-lg" href="#" role="button">{% trans "Learn more" %}</a>
     </div>
   </div>
 
   <div class="container">
     <hr class="my-4" />
     <section>
-      <h1>Posts</h1>
+      <h1>{% trans "Posts" %}</h1>
 
       {% for post in posts %}
         <article class="post">
           <h2><a href="{% url 'posts:page' post.id %}">{{ post.title }}</a></h2>
-          <p>{{ post.date }} by {{ post.author }}</p>
+          <p>{{ post.date }} {% trans "by" %} {{ post.author }}</p>
           <p>{{ post.body }}</p>
         </article>
       {% endfor %}

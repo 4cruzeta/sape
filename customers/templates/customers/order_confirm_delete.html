@@ -1,15 +1,16 @@
 <!-- customers/templates/customers/order_confirm_delete.html -->
 
 {% extends 'customers_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">Delete Order</h1>
-    <p>Are you sure you want to delete this order?</p>
+    <h1 class="mb-4">{% trans "Delete Order" %}</h1>
+    <p>{% trans "Are you sure you want to delete this order?" %}</p>
     <form method="post">
       {% csrf_token %}
-      <button type="submit" class="btn btn-danger">Yes, delete</button>
-      <a href="{% url 'order_detail' order.pk %}" class="btn btn-secondary">Cancel</a>
+      <button type="submit" class="btn btn-danger">{% trans "Yes, delete" %}</button>
+      <a href="{% url 'order_detail' order.pk %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
     </form>
   </div>
 {% endblock %}

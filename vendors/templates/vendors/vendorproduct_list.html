@@ -1,32 +1,33 @@
 <!-- vendors/templates/vendors/vendorproduct_list.html -->
 
 {% extends 'vendors_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">Products for {{ vendor.name }}</h1>
+    <h1 class="mb-4">{% blocktrans with vendor_name=vendor.name %}Products for {{ vendor_name }}{% endblocktrans %}</h1>
     <ul class="list-group list-group-flush">
       <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-        <div class="w-50"><strong>Product</strong></div>
-        <div class="w-25"><strong>Price</strong></div>
-        <div class="w-25"><strong>Actions</strong></div>
+        <div class="w-50"><strong>{% trans "Product" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Price" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Actions" %}</strong></div>
       </li>
       {% for vendorproduct in vendorproducts %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
           <div class="w-50">{{ vendorproduct.name }}</div>
           <div class="w-25">{{ vendorproduct.price }}</div>
           <div class="w-25">
-            <a href="{% url 'vendorproduct_detail' vendorproduct.vendor.pk vendorproduct.pk %}" class="btn btn-sm btn-warning">View</a>
-            <a href="{% url 'vendorproduct_edit' vendorproduct.vendor.pk vendorproduct.pk %}" class="btn btn-sm btn-primary">Edit</a>
+            <a href="{% url 'vendorproduct_detail' vendorproduct.vendor.pk vendorproduct.pk %}" class="btn btn-sm btn-warning">{% trans "View" %}</a>
+            <a href="{% url 'vendorproduct_edit' vendorproduct.vendor.pk vendorproduct.pk %}" class="btn btn-sm btn-primary">{% trans "Edit" %}</a>
             <form action="{% url 'vendorproduct_delete' vendorproduct.vendor.pk vendorproduct.pk %}" method="post" style="display:inline;">
               {% csrf_token %}
-              <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this product?');">Delete</button>
+              <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('{% trans "Are you sure you want to delete this product?" %}');">{% trans "Delete" %}</button>
             </form>
           </div>
         </li>
       {% endfor %}
     </ul>
-    <a href="{% url 'vendorproduct_new' vendor.pk %}" class="btn btn-primary mt-3">Add New Product</a>
-    <a href="{% url 'vendor_detail' vendor.pk %}" class="btn btn-secondary mt-3">Back to Vendor</a>
+    <a href="{% url 'vendorproduct_new' vendor.pk %}" class="btn btn-primary mt-3">{% trans "Add New Product" %}</a>
+    <a href="{% url 'vendor_detail' vendor.pk %}" class="btn btn-secondary mt-3">{% trans "Back to Vendor" %}</a>
   </div>
 {% endblock %}

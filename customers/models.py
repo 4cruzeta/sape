@@ -29,7 +29,7 @@ class Order(models.Model):
             order_items = self.orderitem_set.all()
             for item in order_items:
                 inventory_item = item.inventory
-                # print(f"Decreasing inventory for {inventory_item.name} by {item.quantity}")
+                # print(f"Decreasing inventory for {inventory_item.product} by {item.quantity}")
                 inventory_item.quantity -= item.quantity
                 inventory_item.save()
 
@@ -39,7 +39,7 @@ class OrderItem(models.Model):
     quantity = models.IntegerField()
 
     def __str__(self):
-        return f"{self.quantity} of {self.inventory.name if self.inventory else 'Unknown'} in order {self.order.id}"
+        return f"{self.quantity} of {self.inventory.product if self.inventory else 'Unknown'} in order {self.order.id}"
 
 @receiver(post_save, sender=Order)
 def update_inventory_on_confirm(sender, instance, **kwargs):

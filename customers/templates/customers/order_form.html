@@ -1,6 +1,7 @@
 <!-- customers/templates/customers/order_form.html -->
 
 {% extends 'customers_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
@@ -28,8 +29,8 @@
       </ul>
       <ul class="list-group list-group-flush mb-3">
         <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-          <div class="col-6"><strong>Inventory</strong></div>
-          <div class="col-6"><strong>Quantity</strong></div>
+          <div class="col-6"><strong>{% trans "Inventory" %}</strong></div>
+          <div class="col-6"><strong>{% trans "Quantity" %}</strong></div>
         </li>
         {{ formset.management_form }}
         {% for form in formset %}
@@ -48,9 +49,9 @@
           </li>
         {% endfor %}
       </ul>
-      <button type="submit" class="btn btn-primary">Save</button>
-      <a href="{% url 'order_list' %}" class="btn btn-success">Finished</a>
-      <a href="{% url 'order_list' %}" class="btn btn-secondary">Cancel</a>
+      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+      <a href="{% url 'order_list' %}" class="btn btn-success">{% trans "Finished" %}</a>
+      <a href="{% url 'order_list' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
     </form>
   </div>
 {% endblock %}

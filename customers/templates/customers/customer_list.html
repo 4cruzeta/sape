@@ -1,21 +1,22 @@
 <!-- customers/templates/customers/customer_list.html -->
 
 {% extends 'customers_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">Customers List</h1>
-    <a href="{% url 'customer_new' %}" class="btn btn-primary mt-3">New Customer</a>
+    <h1 class="mb-4">{% trans "Customers List" %}</h1>
+    <a href="{% url 'customer_new' %}" class="btn btn-primary mt-3">{% trans "New Customer" %}</a>
     <ul class="list-group list-group-flush mb-3">
       <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-        <div class="w-75"><strong>Name</strong></div>
-        <div class="w-25"><strong>Actions</strong></div>
+        <div class="w-75"><strong>{% trans "Name" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Actions" %}</strong></div>
       </li>
       {% for customer in customers %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
           <div class="w-75">{{ customer.name }}</div>
           <div class="w-25">
-            <a href="{% url 'customer_detail' customer.pk %}" class="btn btn-sm btn-primary">View</a>
+            <a href="{% url 'customer_detail' customer.pk %}" class="btn btn-sm btn-primary">{% trans "View" %}</a>
           </div>
         </li>
       {% endfor %}

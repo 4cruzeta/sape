@@ -1,14 +1,14 @@
-
+{% load i18n %}
 
 {% block title %}
-    Register a New User
+    {% trans "Register a New User" %}
 {% endblock %}
 
 {% block content %}
-    <h1>Register a New User</h1>
+    <h1>{% trans "Register a New User" %}</h1>
     <form class="form-with-validation" action="{% url 'users:register' %}" method="post">
         {% csrf_token %}
         {{ form }}
-        <button class="form-submit">Submit</button>
+        <button class="form-submit">{% trans "Submit" %}</button>
     </form>
 {% endblock %}

@@ -1,16 +1,17 @@
 <!-- vendors/templates/vendors/vendorproduct_detail.html -->
 
 {% extends 'vendors_layout.html' %}
+{% load i18n %}
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">Vendor Product Detail</h1>
+    <h1 class="mb-4">{% trans "Vendor Product Detail" %}</h1>
     <h2>{{ vendorproduct.name }}</h2>
     <ul class="list-group list-group-flush mt-3">
       <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-        <div class="w-25"><strong>Price</strong></div>
-        <div class="w-50"><strong>Description</strong></div>
-        <div class="w-25"><strong>Bar Code</strong></div>
+        <div class="w-25"><strong>{% trans "Price" %}</strong></div>
+        <div class="w-50"><strong>{% trans "Description" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Bar Code" %}</strong></div>
       </li>
       <li class="list-group-item d-flex justify-content-between">
         <div class="w-25">{{ vendorproduct.price }}</div>
@@ -18,7 +19,7 @@
         <div class="w-25">{{ vendorproduct.bar_code }}</div>
       </li>
     </ul>
-    <a href="{% url 'vendorproduct_new' vendorproduct.vendor.pk %}" class="btn btn-sm btn-primary">New Product</a>
-    <a href="{% url 'products' vendorproduct.vendor.pk %}" class="btn btn-sm btn-secondary">Back</a>
+    <a href="{% url 'vendorproduct_new' vendorproduct.vendor.pk %}" class="btn btn-sm btn-primary">{% trans "New Product" %}</a>
+    <a href="{% url 'products' vendorproduct.vendor.pk %}" class="btn btn-sm btn-secondary">{% trans "Back" %}</a>
   </div>
 {% endblock %}
