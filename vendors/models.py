@@ -53,15 +53,22 @@ class VendorOrder(models.Model):
     ]
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')
+    freight_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    total_value = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    obs = models.TextField(blank=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='vendor_orders_created')
     updated_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='vendor_orders_updated')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    total_value = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    
 
     def calculate_total_value(self):
         total = sum(item.price * item.quantity for item in self.vendororderitem_set.all())
         self.total_value = total
+
+    @property
+    def total_value_plus_freight(self):
+        return self.total_value + self.freight_price
 
     def save(self, *args, **kwargs):
         # Save the instance first to ensure it has a primary key
@@ -69,7 +76,7 @@ class VendorOrder(models.Model):
         # Calculate the total value and save again
         self.calculate_total_value()
         super().save(update_fields=['total_value'])
-
+        
     def __str__(self):
         return f"Order {self.id} by {self.created_by.username if self.created_by else 'Unknown'} for {self.vendor.name}"
 

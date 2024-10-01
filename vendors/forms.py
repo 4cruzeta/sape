@@ -16,12 +16,12 @@ class VendorProductForm(forms.ModelForm):
 class VendorOrderForm(forms.ModelForm):
     class Meta:
         model = VendorOrder
-        fields = ['status']
+        fields = ['status', 'freight_price', 'obs']
 
 class VendorOrderItemForm(forms.ModelForm):
     class Meta:
         model = VendorOrderItem
-        fields = ['product', 'price', 'quantity']  # Include price field
+        fields = ['product', 'price', 'quantity']  
 
     def __init__(self, *args, **kwargs):
         vendor = kwargs.pop('vendor', None)

@@ -8,6 +8,43 @@
     <h1 class="mb-4">{{ order_form.instance.pk|yesno:"Edit Order,New Order" }} for {{ vendor.name }}</h1>
     <form method="post">
       {% csrf_token %}
+      <ul class="list-group list-group-flush mb-3">
+        <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
+          <div class="col-2"><strong>{% trans "Product" %}</strong></div>
+          <div class="col-2"><strong>{% trans "Price" %}</strong></div>
+          <div class="col-2"><strong>{% trans "Price with Freight" %}</strong></div>
+          <div class="col-3"><strong>{% trans "Quantity" %}</strong></div>
+          <div class="col-2"><strong>{% trans "Actions" %}</strong></div>
+        </li>
+        {{ formset.management_form }}
+        {% for form in formset %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ form.id }}
+            <div class="col-2">
+               {{ form.product }}
+            </div>
+            <div class="col-2">
+              {{ form.price }}
+            </div>
+            <div class="col-2">
+              <input type="text" class="form-control price-with-freight" readonly>
+            </div>
+            <div class="col-3">
+               {{ form.quantity }}
+              
+            </div>
+            <div class="col-2">
+              {{ form.DELETE }}
+              <label class="text-danger" for="{{ form.DELETE.id_for_label }}">{% trans "Delete" %}</label>
+            </div>
+            <div class="col-12 text-danger">
+              {{ form.product.errors }}
+              {{ form.price.errors }}
+              {{ form.quantity.errors }}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
       <ul class="list-group list-group-flush mb-4">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           <div class="col-6">
@@ -24,47 +61,22 @@
           {% endif %}
         {% endfor %}
       </ul>
-      <ul class="list-group list-group-flush mb-3">
-        <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-          <div class="col-3"><strong>Product</strong></div>
-          <div class="col-3"><strong>Price</strong></div>
-          <div class="col-3"><strong>Quantity</strong></div>
-          <div class="col-3"><strong>Actions</strong></div>
-        </li>
-        {{ formset.management_form }}
-        {% for form in formset %}
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            {{ form.id }}
-            <div class="col-3">
-              {{ form.product.label_tag }} {{ form.product }}
-            </div>
-            <div class="col-3">
-              {{ form.price.label_tag }} {{ form.price }}
-            </div>
-            <div class="col-3">
-              {{ form.quantity.label_tag }} {{ form.quantity }}
-            </div>
-            <div class="col-3">
-              {{ form.DELETE }}
-              <label class="text-danger" for="{{ form.DELETE.id_for_label }}">Delete</label>
-            </div>
-            <div class="col-12 text-danger">
-              {{ form.product.errors }}
-              {{ form.price.errors }}
-              {{ form.quantity.errors }}
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
+        <!-- Hidden input field for total_value -->
+        <input type="hidden" id="quantity" value="{{ form.quantity }}">
+        <!-- Hidden input field for quantity -->
+      <input type="hidden" id="total_value" value="{{ order_form.instance.total_value }}">
       <div class="list-group-item d-flex justify-content-between align-items-center">
-        <div class="col-9"></div>
-        <div class="col-3">
-          <strong>Total Value:</strong> {{ order_form.instance.total_value }}
+        <div class="col-6">
+          <strong>{% trans "Products Total:" %}</strong> {{ order_form.instance.total_value|floatformat:2 }}
+          
+        </div>
+
+        <div class="col-6">
+          <strong>{% trans "Total Value:" %}</strong> {{ order_form.instance.total_value_plus_freight|floatformat:2 }}
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Save</button>
-      <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-secondary">Cancel</a>
-      <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-success">Finished</a>
+      <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+      <a href="{% url 'vendor_order_list' vendor.id %}" class="btn btn-success">{% trans "Finished" %}</a>
     </form>
   </div>
 
@@ -75,14 +87,50 @@
           '{{ product.name }}': '{{ product.price }}',
         {% endfor %}
       };
-
+    
+      const totalValueElement = document.getElementById('total_value');
+      const totalValue = parseFloat(totalValueElement.value) || 0;
+    
+      function updatePriceWithFreight() {
+        const freightPrice = parseFloat(document.querySelector('input[name="freight_price"]').value) || 0;
+    
+        document.querySelectorAll('select[name$="product"]').forEach(function(selectElement) {
+          const selectedProduct = selectElement.value;
+          const priceField = selectElement.closest('li').querySelector('input[name$="price"]');
+          const quantityField = selectElement.closest('li').querySelector('input[name$="quantity"]');
+          const priceWithFreightField = selectElement.closest('li').querySelector('.price-with-freight');
+    
+          const price = parseFloat(priceField.value) || 0;
+          const quantity = parseInt(quantityField.value) || 0;
+    
+          // Calculate total product price as quantity * price
+          const totalProductPrice = price * quantity;
+    
+          // Calculate apportioned freight
+          const apportionedFreight = totalProductPrice / totalValue  * freightPrice / quantity;
+    
+          // Perform calculation with full precision
+          const priceWithFreight = price + apportionedFreight ;
+    
+          // Format the result to two decimal places for display
+          priceWithFreightField.value = priceWithFreight.toFixed(2);
+        });
+      }
+    
       document.querySelectorAll('select[name$="product"]').forEach(function(selectElement) {
         selectElement.addEventListener('change', function() {
           const selectedProduct = this.value;
-          const priceField = this.closest('li').querySelector('.price-field');
+          const priceField = this.closest('li').querySelector('input[name$="price"]');
           priceField.value = productPriceMap[selectedProduct] || '';
+          updatePriceWithFreight();
         });
       });
-    });
+    
+      document.querySelectorAll('input[name$="quantity"], input[name="freight_price"]').forEach(function(element) {
+        element.addEventListener('change', updatePriceWithFreight);
+      });
+    
+      updatePriceWithFreight();
+    });;
   </script>
 {% endblock %}
