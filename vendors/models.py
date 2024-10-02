@@ -3,6 +3,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from decimal import Decimal, getcontext, ROUND_HALF_UP
 
 class Vendor(models.Model):
     name = models.CharField(max_length=255)
@@ -88,9 +89,33 @@ class VendorOrderItem(models.Model):
     order = models.ForeignKey(VendorOrder, on_delete=models.CASCADE)
     product = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    priceWithFreight = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     quantity = models.PositiveIntegerField()
 
     def save(self, *args, **kwargs):
+        # Set the precision for decimal calculations
+        getcontext().prec = 28
+
+        # Calculate apportioned freight
+        total_product_price = Decimal(self.price) * Decimal(self.quantity)
+        total_value = sum(Decimal(item.price) * Decimal(item.quantity) for item in self.order.vendororderitem_set.all())
+
+        # Ensure total_value is not zero
+        if total_value == 0:
+            total_value = total_product_price
+
+        # Ensure quantity is not zero
+        if self.quantity == 0:
+            raise ValueError("Quantity cannot be zero")
+
+        apportioned_freight = (total_product_price / total_value) * Decimal(self.order.freight_price)
+        
+        # Round apportioned freight to 2 decimal places
+        apportioned_freight = apportioned_freight.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+        
+        # Calculate price with freight and round to 2 decimal places
+        self.priceWithFreight = (Decimal(self.price) + (apportioned_freight / Decimal(self.quantity))).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+        
         super().save(*args, **kwargs)
         self.order.calculate_total_value()
         self.order.save(update_fields=['total_value'])

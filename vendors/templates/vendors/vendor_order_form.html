@@ -111,6 +111,9 @@
     
           // Perform calculation with full precision
           const priceWithFreight = price + apportionedFreight ;
+
+          // Calculate item price with freight
+          const itemPriceWithFreight = priceWithFreight * quantity;
     
           // Format the result to two decimal places for display
           priceWithFreightField.value = priceWithFreight.toFixed(2);
