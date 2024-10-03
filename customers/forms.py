@@ -7,12 +7,12 @@ from .models import Customer, Order, OrderItem
 class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ['name']
+        fields = ['name', 'notes']
 
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['customer', 'status']
+        fields = ['customer', 'status', 'obs']
 
 class OrderItemForm(forms.ModelForm):
     class Meta:
