@@ -1,13 +1,14 @@
 {% extends 'posts_layout.html' %}
+{% load i18n %}
 
 {% block title %}
-  Posts
+  {% trans "Posts" %}
 {% endblock %}
 
 {% block content %}
   <div class="container">
     <section>
-      <h1>Posts</h1>
+      <h1>{% trans "Posts" %}</h1>
 
       {% for post in posts %}
         <article class="post">

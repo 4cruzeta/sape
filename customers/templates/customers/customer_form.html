@@ -7,9 +7,9 @@
   <div class="container mt-4">
     <h1 class="mb-4">
       {% if form.instance.pk %}
-        {% trans "Edit Customer" %}
+      {% blocktrans %}Edit Customer{% endblocktrans %}
       {% else %}
-        {% trans "New Customer" %}
+        {% blocktrans %}New Customer{% endblocktrans %}
       {% endif %}
     </h1>
     <form method="post">

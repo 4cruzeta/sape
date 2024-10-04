@@ -5,6 +5,8 @@ from django.dispatch import receiver
 from vendors.models import VendorOrder, VendorOrderItem, VendorProduct
 from .models import Inventory
 from decimal import Decimal
+from django.utils.translation import gettext as _
+from django.utils import dateformat
 
 @receiver(post_save, sender=VendorOrder)
 def update_inventory(sender, instance, created, **kwargs):
@@ -32,15 +34,29 @@ def update_inventory(sender, instance, created, **kwargs):
                 # Fetch the description from the VendorProduct model
                 product_description = vendor_product.description
                 
+                # Format the date and time to a more readable format in 24-hour format
+                formatted_date = dateformat.format(instance.created_at, 'j N Y, H:i')  # Example: 'Jan 1, 2023, 14:25'
+
                 # Prepare the new description line
-                new_description_line = f"- Last bought from {instance.vendor}, quantity: {item.quantity}, for ${itemPriceWithFreight} each, in {instance.created_at}"
-                
+                new_description_line = _(
+                    "- Last bought from {vendor}, for ${price} each, in {date}"
+                ).format(
+                    vendor=instance.vendor,
+                    quantity=item.quantity,
+                    price=itemPriceWithFreight,
+                    date=formatted_date,
+                )
+
                 # Append the new description to the existing one
                 if inventory_item.description:
-                    inventory_item.description += f"\n{new_description_line}\nProduct - {product_description}"
+                    inventory_item.description += _("\n{new_description_line}\n").format(
+                        new_description_line=new_description_line,
+                    )
                 else:
-                    inventory_item.description = f"{new_description_line}\nProduct - {product_description}"
-                
+                    inventory_item.description = _("{new_description_line}\n").format(
+                        new_description_line=new_description_line,
+                    )
+                                
                 inventory_item.save()
 
 # Connect the capture_previous_status function to the pre_save signal

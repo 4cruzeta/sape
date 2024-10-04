@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-16 16:06-0300\n"
+"POT-Creation-Date: 2024-10-03 17:39-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,16 +19,501 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: customers/templates/customers/customer_confirm_delete.html
+msgid "Edit Order for"
+msgstr "Editar Pedido para"
 
+msgid "New Order for"
+msgstr "Novo Pedido para"
+
+msgid "- Last bought from {vendor}, for ${price} each, in {date}"
+msgstr "- Última compra de {vendor}, por ${price} cada, em {date}"
+
+msgid "Confirmed"
+msgstr "Confirmado"
+
+msgid "Shipped"
+msgstr "Enviado"
+
+msgid "Title"
+msgstr "Título"
+
+msgid "Body"
+msgstr "Corpo"
+
+msgid "Customer"
+msgstr "Cliente"
+
+msgid "Observations"
+msgstr "Observações"
+
+#: customers/templates/customers/customer_confirm_delete.html:8
 msgid "Delete Customer"
 msgstr "Excluir Cliente"
 
+#: customers/templates/customers/customer_confirm_delete.html:9
+#, python-format
 msgid "Are you sure you want to delete the customer \"%(customer_name)s\"?"
 msgstr "Tem certeza de que deseja excluir o cliente \"%(customer_name)s\"?"
 
+#: customers/templates/customers/customer_confirm_delete.html:12
+#: customers/templates/customers/order_confirm_delete.html:12
+#: vendors/templates/vendors/vendor_confirm_delete.html:12
 msgid "Yes, delete"
 msgstr "Sim, excluir"
 
+#: customers/templates/customers/customer_confirm_delete.html:13
+#: customers/templates/customers/customer_form.html:27
+#: customers/templates/customers/order_confirm_delete.html:13
+#: customers/templates/customers/order_form.html:54
+#: inventory/templates/inventory/inventory_form.html:34
+#: vendors/templates/vendors/vendor_confirm_delete.html:13
+#: vendors/templates/vendors/vendor_form.html:21
+#: vendors/templates/vendors/vendor_order_confirm_delete.html:13
 msgid "Cancel"
 msgstr "Cancelar"
+
+#: customers/templates/customers/customer_detail.html:8
+msgid "Customer Detail"
+msgstr "Detalhe do Cliente"
+
+#: customers/templates/customers/customer_detail.html:11
+#: customers/templates/customers/customer_list.html:12
+#: vendors/templates/vendors/vendor_detail.html:14
+#: vendors/templates/vendors/vendor_list.html:13
+msgid "Name"
+msgstr "Nome"
+
+#: customers/templates/customers/customer_detail.html:17
+#: customers/templates/customers/order_detail.html:19
+#: inventory/templates/inventory/inventory_list.html:24
+#: vendors/templates/vendors/vendor_detail.html:24
+#: vendors/templates/vendors/vendor_order_detail.html:20
+#: vendors/templates/vendors/vendor_order_list.html:25
+#: vendors/templates/vendors/vendorproduct_list.html:21
+msgid "Edit"
+msgstr "Editar"
+
+#: customers/templates/customers/customer_detail.html:18
+msgid "Back to Customers List"
+msgstr "Voltar para a Lista de Clientes"
+
+#: customers/templates/customers/customer_form.html:10
+
+msgid "Edit Customer"
+msgstr "Editar Cliente"
+
+#: customers/templates/customers/customer_form.html:12
+#: customers/templates/customers/customer_list.html:9
+#: templates/customers_layout.html:35
+
+msgid "New Customer"
+msgstr "Novo Cliente"
+
+#: customers/templates/customers/customer_form.html:26
+#: customers/templates/customers/order_form.html:52
+#: inventory/templates/inventory/inventory_form.html:33
+#: vendors/templates/vendors/vendor_form.html:20
+#: vendors/templates/vendors/vendor_order_form.html:78
+#: vendors/templates/vendors/vendorproduct_form.html:18
+msgid "Save"
+msgstr "Salvar"
+
+#: customers/templates/customers/customer_list.html:8
+msgid "Customers List"
+msgstr "Lista de Clientes"
+
+#: customers/templates/customers/customer_list.html:13
+#: customers/templates/customers/order_list.html:13
+#: inventory/templates/inventory/inventory_list.html:15
+#: vendors/templates/vendors/vendor_detail.html:17
+#: vendors/templates/vendors/vendor_list.html:16
+#: vendors/templates/vendors/vendor_order_form.html:17
+#: vendors/templates/vendors/vendor_order_list.html:17
+#: vendors/templates/vendors/vendorproduct_list.html:13
+msgid "Actions"
+msgstr "Ações"
+
+#: customers/templates/customers/customer_list.html:19
+#: customers/templates/customers/order_list.html:19
+#: inventory/templates/inventory/inventory_list.html:23
+#: vendors/templates/vendors/vendor_list.html:23
+#: vendors/templates/vendors/vendor_order_list.html:24
+#: vendors/templates/vendors/vendorproduct_list.html:20
+msgid "View"
+msgstr "Ver"
+
+#: customers/templates/customers/order_confirm_delete.html:8
+msgid "Delete Order"
+msgstr "Excluir Pedido"
+
+#: customers/templates/customers/order_confirm_delete.html:9
+#: vendors/templates/vendors/vendor_order_confirm_delete.html:9
+#: vendors/templates/vendors/vendor_order_list.html:28
+msgid "Are you sure you want to delete this order?"
+msgstr "Tem certeza de que deseja excluir este pedido?"
+
+#: customers/templates/customers/order_detail.html:8
+msgid "Order Detail"
+msgstr "Detalhe do Pedido"
+
+#: customers/templates/customers/order_detail.html:11
+#: customers/templates/customers/order_list.html:12
+msgid "Order"
+msgstr "Pedido"
+
+#: customers/templates/customers/order_detail.html:12
+#: vendors/templates/vendors/vendor_order_detail.html:11
+#: vendors/templates/vendors/vendor_order_list.html:15
+#: vendors/templates/vendors/vendor_order_list.html:21
+msgid "Status"
+msgstr "Status"
+
+#: customers/templates/customers/order_detail.html:15
+#: customers/templates/customers/order_list.html:17
+#, python-format
+msgid "Order %(order_id)s for %(customer_name)s"
+msgstr "Pedido %(order_id)s para %(customer_name)s"
+
+#: customers/templates/customers/order_detail.html:20
+msgid "Back to Orders List"
+msgstr "Voltar para a Lista de Pedidos"
+
+#: customers/templates/customers/order_form.html:32
+#: templates/customers_layout.html:38 templates/inventory_layout.html:33
+#: templates/layout.html:40 templates/vendors_layout.html:39
+msgid "Inventory"
+msgstr "Estoque"
+
+#: customers/templates/customers/order_form.html:33
+#: inventory/templates/inventory/inventory_detail.html:12
+#: inventory/templates/inventory/inventory_list.html:13
+#: vendors/templates/vendors/vendor_order_form.html:16
+msgid "Quantity"
+msgstr "Quantidade"
+
+#: customers/templates/customers/order_form.html:53
+#: vendors/templates/vendors/vendor_order_form.html:79
+msgid "Finished"
+msgstr "Finalizado"
+
+#: customers/templates/customers/order_list.html:8
+msgid "Orders List"
+msgstr "Lista de Pedidos"
+
+#: customers/templates/customers/order_list.html:9
+#: templates/customers_layout.html:44
+#: vendors/templates/vendors/vendor_detail.html:9
+#: vendors/templates/vendors/vendor_order_list.html:10
+msgid "New Order"
+msgstr "Novo Pedido"
+
+#: inventory/templates/inventory/inventory_detail.html:8
+msgid "Inventory Detail"
+msgstr "Detalhe do Estoque"
+
+#: inventory/templates/inventory/inventory_detail.html:11
+#: inventory/templates/inventory/inventory_list.html:12
+#: vendors/templates/vendors/vendor_order_form.html:13
+#: vendors/templates/vendors/vendorproduct_list.html:11
+msgid "Product"
+msgstr "Produto"
+
+#: inventory/templates/inventory/inventory_detail.html:13
+#: vendors/templates/vendors/vendorproduct_detail.html:13
+msgid "Description"
+msgstr "Descrição"
+
+#: inventory/templates/inventory/inventory_detail.html:23
+msgid "Back to Inventory List"
+msgstr "Voltar para a Lista de Estoque"
+
+#: inventory/templates/inventory/inventory_form.html:10
+msgid "Edit Inventory Item"
+msgstr "Editar Item de Estoque"
+
+#: inventory/templates/inventory/inventory_form.html:12
+msgid "New Inventory Item"
+msgstr "Novo Item de Estoque"
+
+#: inventory/templates/inventory/inventory_form.html:18
+msgid "Product: "
+msgstr "Produto: "
+
+#: inventory/templates/inventory/inventory_form.html:22
+msgid "Quantity: "
+msgstr "Quantidade: "
+
+#: inventory/templates/inventory/inventory_form.html:26
+msgid "Cost Price: "
+msgstr "Preço de Custo: "
+
+#: inventory/templates/inventory/inventory_form.html:30
+msgid "Description: "
+msgstr "Descrição: "
+
+#: inventory/templates/inventory/inventory_list.html:8
+msgid "Inventory List"
+msgstr "Lista de Estoque"
+
+#: inventory/templates/inventory/inventory_list.html:9
+#: vendors/templates/vendors/vendorproduct_list.html:30
+msgid "Add New Product"
+msgstr "Adicionar Novo Produto"
+
+#: inventory/templates/inventory/inventory_list.html:14
+msgid "Cost Price"
+msgstr "Preço de Custo"
+
+#: templates/customers_layout.html:24 templates/posts_layout.html:25
+msgid "Toggle navigation"
+msgstr "Alternar navegação"
+
+#: templates/customers_layout.html:29 templates/index.html:7
+#: templates/inventory_layout.html:30 templates/layout.html:27
+#: templates/posts_layout.html:29 templates/vendors_layout.html:30
+msgid "Home"
+msgstr "Início"
+
+#: templates/customers_layout.html:32 templates/inventory_layout.html:39
+#: templates/layout.html:43
+msgid "Customers"
+msgstr "Clientes"
+
+#: templates/customers_layout.html:41
+msgid "Orders"
+msgstr "Pedidos"
+
+#: templates/customers_layout.html:49 templates/posts_layout.html:41
+msgid "User Logout"
+msgstr "Saída do Usuário"
+
+#: templates/customers_layout.html:49 templates/inventory_layout.html:44
+#: templates/layout.html:48 templates/posts_layout.html:41
+#: templates/vendors_layout.html:44
+msgid "Logout"
+msgstr "Sair"
+
+#: templates/customers_layout.html:54 templates/inventory_layout.html:49
+#: templates/layout.html:53 templates/posts_layout.html:46
+#: templates/vendors_layout.html:49
+msgid "Login"
+msgstr "Entrar"
+
+#: templates/index.html:13
+msgid "Welcome to SAPE"
+msgstr "Ben-vindo ao SAPE"
+
+#: templates/index.html:14
+msgid "Small Business Administration System"
+msgstr "Sistema de Administração para Pequenas Empresas"
+
+#: templates/index.html:16
+msgid "Small Business Administration System."
+msgstr "Sistema de Administração para Pequenas Empresas."
+
+#: templates/index.html:17
+msgid "Learn more"
+msgstr "Saiba mais"
+
+#: templates/index.html:24 templates/layout.html:30
+#: templates/posts_layout.html:32
+msgid "Posts"
+msgstr "Mensagens"
+
+#: templates/index.html:29
+msgid "by"
+msgstr "por"
+
+#: templates/inventory_layout.html:36 templates/layout.html:37
+#: templates/vendors_layout.html:33
+msgid "Vendors"
+msgstr "Fornecedores"
+
+#: templates/layout.html:34 templates/posts_layout.html:36
+msgid "New Post"
+msgstr "Nova Mensagem"
+
+msgid "Add Post"
+msgstr "Adicionar Mensagem"
+
+#: templates/vendors_layout.html:36
+#: vendors/templates/vendors/vendor_form.html:8
+#: vendors/templates/vendors/vendor_list.html:9
+msgid "New Vendor"
+msgstr "Novo Fornecedor"
+
+#: users/templates/users/login.html:4 users/templates/users/login.html:8
+msgid "User Login"
+msgstr "Entrar"
+
+#: users/templates/users/login.html:15 users/templates/users/register.html:12
+msgid "Submit"
+msgstr "Enviar"
+
+#: users/templates/users/register.html:4 users/templates/users/register.html:8
+msgid "Register a New User"
+msgstr "Registrar um Novo Usuário"
+
+#: vendors/templates/vendors/vendor_confirm_delete.html:8
+msgid "Delete Vendor"
+msgstr "Excluir Fornecedor"
+
+#: vendors/templates/vendors/vendor_confirm_delete.html:9
+msgid "Are you sure you want to delete the vendor \"%(vendor_name)s\"?"
+msgstr "Tem certeza de que deseja excluir o fornecedor \"%(vendor_name)s\"?"
+
+#: vendors/templates/vendors/vendor_detail.html:8
+msgid "Vendor Detail"
+msgstr "Detalhe do Fornecedor"
+
+#: vendors/templates/vendors/vendor_detail.html:10
+msgid "List Orders"
+msgstr "Listar Pedidos"
+
+#: vendors/templates/vendors/vendor_detail.html:11
+#: vendors/templates/vendors/vendorproduct_detail.html:23
+msgid "Back"
+msgstr "Voltar"
+
+#: vendors/templates/vendors/vendor_detail.html:15
+msgid "Address"
+msgstr "Endereço"
+
+#: vendors/templates/vendors/vendor_detail.html:16
+msgid "Phone"
+msgstr "Telefone"
+
+#: vendors/templates/vendors/vendor_detail.html:25
+msgid "Products"
+msgstr "Produtos"
+
+#: vendors/templates/vendors/vendor_detail.html:26
+msgid "Are you sure you want to delete this vendor?"
+msgstr "Tem certeza de que deseja excluir este fornecedor?"
+
+#: vendors/templates/vendors/vendor_detail.html:26
+#: vendors/templates/vendors/vendor_order_confirm_delete.html:12
+#: vendors/templates/vendors/vendor_order_form.html:38
+#: vendors/templates/vendors/vendor_order_list.html:28
+#: vendors/templates/vendors/vendorproduct_list.html:24
+msgid "Delete"
+msgstr "Excluir"
+
+#: vendors/templates/vendors/vendor_detail.html:30
+msgid "Email"
+msgstr "E-mail"
+
+#: vendors/templates/vendors/vendor_detail.html:31
+msgid "Contact"
+msgstr "Contato"
+
+#: vendors/templates/vendors/vendor_detail.html:32
+msgid "Notes"
+msgstr "Notas"
+
+#: vendors/templates/vendors/vendor_form.html:8
+msgid "Edit Vendor"
+msgstr "Editar Fornecedor"
+
+#: vendors/templates/vendors/vendor_list.html:8
+msgid "Vendors List"
+msgstr "Lista de Fornecedores"
+
+#: vendors/templates/vendors/vendor_order_confirm_delete.html:8
+#, python-format
+msgid "Delete Order for %(vendor_name)s"
+msgstr "Apagar Pedido para %(vendor_name)s"
+
+#: vendors/templates/vendors/vendor_order_detail.html:8
+#, python-format
+msgid "Order Detail for %(vendor_name)s"
+msgstr "Detalhe do Pedido para %(vendor_name)s"
+
+#: vendors/templates/vendors/vendor_order_detail.html:12
+#: vendors/templates/vendors/vendor_order_list.html:16
+msgid "Created At"
+msgstr "Criado em"
+
+#: vendors/templates/vendors/vendor_order_detail.html:21
+msgid "Back to Orders"
+msgstr "Voltar para Pedidos"
+
+#: vendors/templates/vendors/vendor_order_detail.html:26
+#: vendors/templates/vendors/vendor_order_detail.html:32
+msgid "Update Status"
+msgstr "Atualizar Status"
+
+#: vendors/templates/vendors/vendor_order_detail.html:28
+msgid "Pending"
+msgstr "Pendente"
+
+#: vendors/templates/vendors/vendor_order_detail.html:29
+msgid "Delivered"
+msgstr "Entregue"
+
+#: vendors/templates/vendors/vendor_order_form.html:14
+#: vendors/templates/vendors/vendorproduct_detail.html:12
+#: vendors/templates/vendors/vendorproduct_list.html:12
+msgid "Price"
+msgstr "Preço"
+
+#: vendors/templates/vendors/vendor_order_form.html:15
+msgid "Price with Freight"
+msgstr "Preço com Frete"
+
+#: vendors/templates/vendors/vendor_order_form.html:70
+msgid "Products Total:"
+msgstr "Total de Produtos:"
+
+#: vendors/templates/vendors/vendor_order_form.html:75
+msgid "Total Value:"
+msgstr "Valor Total:"
+
+#: vendors/templates/vendors/vendor_order_list.html:8
+#, python-format
+msgid "Orders for %(vendor_name)s"
+msgstr "Pedidos para %(vendor_name)s"
+
+#: vendors/templates/vendors/vendor_order_list.html:11
+#: vendors/templates/vendors/vendorproduct_list.html:31
+msgid "Back to Vendor"
+msgstr "Voltar para Fornecedor"
+
+#: vendors/templates/vendors/vendor_order_list.html:22
+msgid "Created at"
+msgstr "Criado em"
+
+#: vendors/templates/vendors/vendorproduct_detail.html:8
+msgid "Vendor Product Detail"
+msgstr "Detalhe do Produto do Fornecedor"
+
+#: vendors/templates/vendors/vendorproduct_detail.html:14
+msgid "Bar Code"
+msgstr "Código de Barras"
+
+#: vendors/templates/vendors/vendorproduct_detail.html:22
+msgid "New Product"
+msgstr "Novo Produto"
+
+#: vendors/templates/vendors/vendorproduct_form.html:10
+#, python-format
+msgid "Edit Product for %(vendor_name)s"
+msgstr "Editar Produto para %(vendor_name)s"
+
+#: vendors/templates/vendors/vendorproduct_form.html:12
+#, python-format
+msgid "Add New Product for %(vendor_name)s"
+msgstr "Adicionar Novo Produto para %(vendor_name)s"
+
+#: vendors/templates/vendors/vendorproduct_form.html:20
+msgid "Back to Products"
+msgstr "Voltar para Produtos"
+
+#: vendors/templates/vendors/vendorproduct_list.html:8
+#, python-format
+msgid "Products for %(vendor_name)s"
+msgstr "Produtos para %(vendor_name)s"
+
+#: vendors/templates/vendors/vendorproduct_list.html:24
+msgid "Are you sure you want to delete this product?"
+msgstr "Tem certeza de que deseja excluir este produto?"

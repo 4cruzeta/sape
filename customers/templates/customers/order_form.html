@@ -5,7 +5,13 @@
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">{{ order_form.instance.pk|yesno:"Edit Order,New Order" }}</h1>
+    <h1 class="mb-4">
+      {% if order_form.instance.pk %}
+        {% trans "Edit Order for" %} {{ vendor.name }}
+      {% else %}
+        {% trans "New Order for" %} {{ vendor.name }}
+      {% endif %}
+    </h1>
     <form method="post">
       {% csrf_token %}
       <ul class="list-group list-group-flush mb-4">

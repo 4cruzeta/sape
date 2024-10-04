@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from inventory.models import Inventory
+from django.utils.translation import gettext_lazy as _
 
 class Customer(models.Model):
     name = models.CharField(max_length=255)
@@ -20,10 +21,10 @@ class Customer(models.Model):
 
 class Order(models.Model):
     STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('confirmed', 'Confirmed'),
-        ('shipped', 'Shipped'),
-        ('delivered', 'Delivered'),
+        ('pending', _('Pending')),
+        ('confirmed', _('Confirmed')),
+        ('shipped', _('Shipped')),
+        ('delivered', _('Delivered')),
     ]
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')

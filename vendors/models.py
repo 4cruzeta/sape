@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from decimal import Decimal, getcontext, ROUND_HALF_UP
+from django.utils.translation import gettext_lazy as _
 
 class Vendor(models.Model):
     name = models.CharField(max_length=255)
@@ -47,10 +48,10 @@ class VendorProduct(models.Model):
 
 class VendorOrder(models.Model):
     STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('confirmed', 'Confirmed'),
-        ('shipped', 'Shipped'),
-        ('delivered', 'Delivered'),
+        ('pending', _('Pending')),
+        ('confirmed', _('Confirmed')),
+        ('shipped', _('Shipped')),
+        ('delivered', _('Delivered')),
     ]
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')
