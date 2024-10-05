@@ -13,6 +13,12 @@
       <li class="list-group-item d-flex justify-content-between">
         <div class="w-50">{{ customer.name }}</div>
       </li>
+      <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
+        <div class="w-50"><strong>{% trans "Notes" %}</strong></div>
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <div class="w-50">{{ customer.notes }}</div>
+      </li>
     </ul>
     <a href="{% url 'customer_edit' customer.pk %}" class="btn btn-sm btn-warning">{% trans "Edit" %}</a>
     <a href="{% url 'customer_list' %}" class="btn btn-sm btn-secondary">{% trans "Back to Customers List" %}</a>
