@@ -14,7 +14,7 @@
         <article class="post">
           <h2><a href="{% url 'posts:page' post.id %}">{{ post.title }}</a></h2>
           <p>{{ post.date }} by {{ post.author }}</p>
-          <p>{{ post.body }}</p>
+          <p>{{ post.body|linebreaks }}</p>
         </article>
       {% endfor %}
     </section>
