@@ -10,6 +10,10 @@ from django.utils.translation import gettext_lazy as _
 
 class Customer(models.Model):
     name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    email = models.EmailField(max_length=255, blank=True, null=True)
+    contact = models.CharField(max_length=255, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='customer_created')
     updated_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='customer_updated')
@@ -28,6 +32,8 @@ class Order(models.Model):
     ]
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='pending')
+    freight_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    total_value = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     obs = models.TextField(blank=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='customer_orders_created')
     updated_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='customer_orders_updated')
@@ -49,6 +55,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     inventory = models.ForeignKey(Inventory, null=True, on_delete=models.SET_NULL)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     quantity = models.IntegerField()
 
     def __str__(self):

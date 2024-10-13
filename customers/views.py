@@ -71,17 +71,20 @@ def order_new(request):
         if order_form.is_valid() and formset.is_valid():
             order = order_form.save(commit=False)
             order.created_by = request.user
-            order.updated_by = request.user
             order.save()
             formset.instance = order
             formset.save()
+            order.total_value = sum(form.calculate_total_value() for form in formset.forms)
+            order.save()
             return redirect('order_edit', pk=order.pk)
     else:
         order_form = OrderForm()
         formset = OrderItemFormSet()
-        for form in formset:
-            form.fields['inventory'].queryset = Inventory.objects.all()
-    return render(request, 'customers/order_form.html', {'order_form': order_form, 'formset': formset})
+    return render(request, 'customers/order_form.html', {
+        'order_form': order_form, 
+        'formset': formset,
+        'total_value': 0
+    })
 
 @login_required(login_url="/users/login/")
 def order_edit(request, pk):
@@ -90,17 +93,20 @@ def order_edit(request, pk):
         order_form = OrderForm(request.POST, instance=order)
         formset = OrderItemFormSet(request.POST, instance=order)
         if order_form.is_valid() and formset.is_valid():
-            order = order_form.save(commit=False)
-            order.updated_by = request.user
-            order.save()
+            order_form.save()
             formset.save()
+            order.total_value = sum(form.calculate_total_value() for form in formset.forms)
+            order.save()
             return redirect('order_edit', pk=order.pk)
     else:
         order_form = OrderForm(instance=order)
         formset = OrderItemFormSet(instance=order)
-        for form in formset:
-            form.fields['inventory'].queryset = Inventory.objects.all()
-    return render(request, 'customers/order_form.html', {'order_form': order_form, 'formset': formset})
+    total_value = order.total_value
+    return render(request, 'customers/order_form.html', {
+        'order_form': order_form,
+        'formset': formset,
+        'total_value': total_value
+    })
 
 @login_required(login_url="/users/login/")
 def order_delete(request, pk):

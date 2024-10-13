@@ -35,22 +35,27 @@
       </ul>
       <ul class="list-group list-group-flush mb-3">
         <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-          <div class="col-6"><strong>{% trans "Inventory" %}</strong></div>
-          <div class="col-6"><strong>{% trans "Quantity" %}</strong></div>
+          <div class="col-4"><strong>{% trans "Inventory" %}</strong></div>
+          <div class="col-4"><strong>{% trans "Quantity" %}</strong></div>
+          <div class="col-4"><strong>{% trans "Price" %}</strong></div>
         </li>
         {{ formset.management_form }}
         {% for form in formset %}
           <li class="list-group-item d-flex justify-content-between align-items-center">
             {{ form.id }}
-            <div class="col-6">
-              {{ form.inventory.label_tag }} {{ form.inventory }}
+            <div class="col-4">
+              {{ form.inventory }}
             </div>
-            <div class="col-6">
-              {{ form.quantity.label_tag }} {{ form.quantity }}
+            <div class="col-4">
+              {{ form.quantity }}
+            </div>
+            <div class="col-4">
+              {{ form.price }}
             </div>
             <div class="col-6 text-danger">
               {{ form.inventory.errors }}
               {{ form.quantity.errors }}
+              {{ form.price.errors }}
             </div>
           </li>
         {% endfor %}
