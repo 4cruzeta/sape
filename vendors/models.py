@@ -93,6 +93,12 @@ class VendorOrderItem(models.Model):
     priceWithFreight = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     quantity = models.PositiveIntegerField()
 
+    @property
+    def price_with_freight(self):
+        if self.order.freight_price:
+            return self.price + (self.order.freight_price / self.quantity)
+        return self.price
+
     def save(self, *args, **kwargs):
         # Set the precision for decimal calculations
         getcontext().prec = 28

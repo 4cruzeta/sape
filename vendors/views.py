@@ -147,7 +147,7 @@ def vendor_order_detail(request, vendor_id, order_id):
     vendor = get_object_or_404(Vendor, pk=vendor_id)
     order = get_object_or_404(VendorOrder, pk=order_id, vendor=vendor)
     return render(request, 'vendors/vendor_order_detail.html', {'vendor': vendor, 'order': order})
-
+    
 @login_required(login_url="/users/login/")
 def vendor_order_delete(request, vendor_id, order_id):
     vendor_order = get_object_or_404(VendorOrder, pk=order_id, vendor_id=vendor_id)

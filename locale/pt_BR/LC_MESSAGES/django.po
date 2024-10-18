@@ -18,6 +18,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+# django-admin compilemessages - comando para compilar traduções
+
+msgid "Total Value"
+msgstr "Valor Total"
+
+msgid "Order Items"
+msgstr "Items do Pedido"
+
+msgid "Freight Price"
+msgstr "Preço do Frete"
 
 msgid "Edit Order for"
 msgstr "Editar Pedido para"
@@ -27,6 +37,9 @@ msgstr "Novo Pedido para"
 
 msgid "- Last bought from {vendor}, for ${price} each, in {date}"
 msgstr "- Última compra de {vendor}, por ${price} cada, em {date}"
+
+msgid "- Last added by {user}, {quantity} items for ${price} each, on {date}, with description: {description}"
+msgstr "- Última adição por {user}, {quantity} items por ${price} cada, em {date}, com a descrição: {description}"
 
 msgid "Confirmed"
 msgstr "Confirmado"

@@ -60,8 +60,20 @@ def order_list(request):
 @login_required(login_url="/users/login/")
 def order_detail(request, pk):
     order = get_object_or_404(Order, pk=pk)
-    order_items = OrderItem.objects.filter(order=order)
-    return render(request, 'customers/order_detail.html', {'order': order, 'order_items': order_items})
+    order_items = order.orderitem_set.all()
+    order_items_with_total = [
+        {
+            'inventory': item.inventory,
+            'quantity': item.quantity,
+            'price': item.price,
+            'total': item.price * item.quantity
+        }
+        for item in order_items
+    ]
+    return render(request, 'customers/order_detail.html', {
+        'order': order,
+        'order_items': order_items_with_total
+    })
 
 @login_required(login_url="/users/login/")
 def order_new(request):
@@ -76,6 +88,8 @@ def order_new(request):
             formset.save()
             order.total_value = sum(form.calculate_total_value() for form in formset.forms)
             order.save()
+            if order.status == 'confirmed':
+                order.update_inventory()
             return redirect('order_edit', pk=order.pk)
     else:
         order_form = OrderForm()
@@ -97,6 +111,8 @@ def order_edit(request, pk):
             formset.save()
             order.total_value = sum(form.calculate_total_value() for form in formset.forms)
             order.save()
+            if order.status == 'confirmed':
+                order.update_inventory()
             return redirect('order_edit', pk=order.pk)
     else:
         order_form = OrderForm(instance=order)

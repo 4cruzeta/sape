@@ -8,13 +8,15 @@
     <h1 class="mb-4">{% trans "Inventory Detail" %}</h1>
     <ul class="list-group list-group-flush mb-3">
       <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
-        <div class="w-50"><strong>{% trans "Product" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Product" %}</strong></div>
         <div class="w-25"><strong>{% trans "Quantity" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Price" %}</strong></div> <!-- New column for Price -->
         <div class="w-25"><strong>{% trans "Description" %}</strong></div> <!-- New column for Description -->
       </li>
       <li class="list-group-item d-flex justify-content-between">
-        <div class="w-50">{{ inventory_item.product }}</div>
+        <div class="w-25">{{ inventory_item.product }}</div>
         <div class="w-25">{{ inventory_item.quantity }}</div>
+        <div class="w-25">{{ inventory_item.cost_price }}</div> <!-- Display the price -->
         <div class="w-25">
           <textarea class="form-control" rows="5" readonly>{{ inventory_item.description }}</textarea> <!-- Display the description in a text box -->
         </div>

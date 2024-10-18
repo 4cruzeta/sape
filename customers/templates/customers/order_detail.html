@@ -15,6 +15,35 @@
         <div class="w-50">{% blocktrans with order_id=order.id customer_name=order.customer.name %}Order {{ order_id }} for {{ customer_name }}{% endblocktrans %}</div>
         <div class="w-50">{{ order.status }}</div>
       </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <div class="w-50"><strong>{% trans "Freight Price" %}</strong></div>
+        <div class="w-50">{{ order.freight_price }}</div>
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <div class="w-50"><strong>{% trans "Total Value" %}</strong></div>
+        <div class="w-50">{{ order.total_value }}</div>
+      </li>
+      <li class="list-group-item d-flex justify-content-between">
+        <div class="w-50"><strong>{% trans "Observations" %}</strong></div>
+        <div class="w-50">{{ order.obs }}</div>
+      </li>
+    </ul>
+    <h2 class="mt-4">{% trans "Order Items" %}</h2>
+    <ul class="list-group list-group-flush mb-3">
+      <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
+        <div class="w-25"><strong>{% trans "Inventory" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Quantity" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Price" %}</strong></div>
+        <div class="w-25"><strong>{% trans "Total" %}</strong></div>
+      </li>
+      {% for item in order_items %}
+        <li class="list-group-item d-flex justify-content-between">
+          <div class="w-25">{{ item.inventory }}</div>
+          <div class="w-25">{{ item.quantity }}</div>
+          <div class="w-25">{{ item.price }}</div>
+          <div class="w-25">{{ item.total }}</div>
+        </li>
+      {% endfor %}
     </ul>
     <a href="{% url 'order_edit' order.pk %}" class="btn btn-sm btn-warning">{% trans "Edit" %}</a>
     <a href="{% url 'order_list' %}" class="btn btn-sm btn-secondary">{% trans "Back to Orders List" %}</a>

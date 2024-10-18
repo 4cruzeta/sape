@@ -61,7 +61,8 @@ class OrderItem(models.Model):
     def __str__(self):
         return f"{self.quantity} of {self.inventory.product if self.inventory else 'Unknown'} in order {self.order.id}"
 
-@receiver(post_save, sender=Order)
-def update_inventory_on_confirm(sender, instance, **kwargs):
-    if instance.status == 'confirmed':
-        instance.update_inventory()
+# Remove the post_save signal handler
+# @receiver(post_save, sender=Order)
+# def update_inventory_on_confirm(sender, instance, **kwargs):
+#     if instance.status == 'confirmed':
+#         instance.update_inventory()
